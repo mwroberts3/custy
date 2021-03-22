@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+body {
+  margin: 0 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #999;
+}
+
+#customer-service-todo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.customer-service-card {
+  height: 100px;
+  background: #333;
+  color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.customer-service-card hr {
+  margin-bottom: 10px;
+}
+
+.customer-service-card p {
+  width: 75%;
+  text-align: justify;
+}
+
+.csc-options {
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.csc-options span {
+  cursor: pointer;
+}
+
+.urgent {
+  background: #b30000;
+}
+
+.waiting {
+  background: #642e64;
+}
