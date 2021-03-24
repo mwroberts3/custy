@@ -1,6 +1,6 @@
-const AddTodo = () => {
+const AddTodo = ({showAddTodoForm, addTodo}) => {
     return (
-        <button>Add Todo</button>
+        <button onClick={() => showAddTodoForm()}>{addTodo ? 'Close' : 'Add Todo'}</button>
     )
 }
 
