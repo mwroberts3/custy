@@ -1,13 +1,11 @@
 const EditTodo = ({submitEdit, orderNumber, todo}) => {
-    console.log(orderNumber, todo)
-
     return (
-        <form id="add-todo-form">
+        <form id="edit-todo-form">
            <label>Order Number:</label>
            <p>{orderNumber}</p>
            <label>Todo:</label>
-           <textarea id="editedTodoDescription" defaultValue={todo}></textarea>
-           <button onClick={(e) => {
+           <textarea id="editedTodoDescription" defaultValue={todo} autoFocus></textarea>
+           <button onClick={() => {
                submitEdit(document.getElementById('editedTodoDescription').value)
            }}>Submit</button>
         </form>

@@ -16,14 +16,26 @@ h1 {
   text-align: center;
 }
 
+#custy-logo {
+  width: 120px;
+}
+
+#app-header {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
   padding: 10px;
   font-size: 16px;
   border-radius: 10px;
-  border: 1px solid #999;
+  border: 1px solid #88a7b9;
 }
 
-#add-todo-form {
+#add-todo-form,
+#edit-todo-form {
   position: absolute;
   top: 100px;
   right: 50%;
@@ -32,11 +44,19 @@ button {
   background: #777;
   color: #fff;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#add-todo-form label,
-#add-todo-form input {
-  display: block;
+#add-todo-form input,
+#add-todo-form textarea,
+#edit-todo-form input,
+#edit-todo-form textarea {
+  margin-bottom: 10px;
+  width: 90%;
+  border: 1px solid #777;
+  border-radius: 5px;
 }
 
 #customer-service-todo {
@@ -56,6 +76,7 @@ button {
   background: #333;
   color: #fff;
   border-radius: 10px;
+  border: 2px solid #88a7b9;
   padding: 15px;
   margin: 5px;
   display: flex;

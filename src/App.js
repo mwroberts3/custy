@@ -1,4 +1,5 @@
 import './App.css';
+import logo from './custy-logo.jpg'
 import CSCardGrid from './CSCardGrid'
 import { useState } from 'react'
 import AddTodo from './AddTodo'
@@ -54,11 +55,13 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Custy</h1>
+      <header id="app-header">
+      <img id="custy-logo" src={logo} alt="Logo" />
+      </header>
       <div style={{
         width:'100%', display: 'flex', justifyContent: 'center'
         }}>
-        <AddTodo showAddTodoForm={showAddTodoForm} addTodo={addTodo}/>
+        <AddTodo showAddTodoForm={showAddTodoForm} addTodo={addTodo} editCheck={editCheck}/>
       </div>
       <CSCardGrid initiateEdit={initiateEdit}/>
       {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
