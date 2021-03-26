@@ -1,14 +1,9 @@
-import { useEffect } from 'react'
 import CSCard from './CSCard'
 
 const CSCardGrid = ({initiateEdit, todos, setTodoUrgent, setTodoWaiting, closeTodo}) => {
-
-
     window.onfocus = () => {
         window.location.reload()
     }
-    // useEffect(() => {
-    // })
 
     return (
         <div id='customer-service-todo'>
