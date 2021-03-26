@@ -1,10 +1,10 @@
-const AddTodo = ({showAddTodoForm, addTodo, editCheck}) => {
+const AddTodo = ({showAddTodoForm, showEditTodoForm, addTodo, editCheck}) => {
     console.log(addTodo)
     if (addTodo || editCheck) {
-        if (addTodo) {
+        if (addTodo && !editCheck) {
             return (<button id="addTodoBtn" onClick={() => showAddTodoForm()}>Close</button>)
         } else {
-            return (<button id="addTodoBtn" onClick={() => showAddTodoForm()}>EDIT CLOSE</button>)
+            return (<button id="addTodoBtn" onClick={() => showEditTodoForm()}>Close</button>)
         }
     } else {
         return (<button id="addTodoBtn" onClick={() => showAddTodoForm()}>Add Todo</button>)

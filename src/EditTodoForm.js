@@ -5,7 +5,8 @@ const EditTodo = ({submitEdit, orderNumber, todo}) => {
            <p>{orderNumber}</p>
            <label>Todo:</label>
            <textarea id="editedTodoDescription" defaultValue={todo} autoFocus></textarea>
-           <button onClick={() => {
+           <button onClick={(e) => {
+               e.preventDefault()
                submitEdit(document.getElementById('editedTodoDescription').value)
            }}>Submit</button>
         </form>

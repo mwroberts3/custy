@@ -6,6 +6,7 @@ const AddTodoForm = ({ addNewTodo }) => {
            <label>Todo:</label>
            <textarea id="newTodoDescription"></textarea>
            <button onClick={(e) => {
+               e.preventDefault()
                addNewTodo(document.getElementById('newTodoOrderNumber').value, document.getElementById('newTodoDescription').value)}}>Submit</button>
         </form>
     )
