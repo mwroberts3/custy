@@ -1,21 +1,17 @@
 import './App.css';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import logo from './custy-logo.jpg'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
 import AddTodoForm from './AddTodoForm'
 import EditTodoForm from './EditTodoForm'
+import GithubLink from './GithubLink'
 
 function App() {
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
-
-  useEffect(() => {
-    console.log('todo added')
-    // return (<Redirect exact to="/" />)
-  }, [todos])
 
   const showAddTodoForm = () =>{
     setAddTodo(!addTodo)
@@ -45,14 +41,12 @@ function App() {
       orderNumber,
       todo
     }
-    console.log(orderNumber, todo)
     setPreEditInfo(tempEdit)
     setEditCheck(!editCheck)
+    setAddTodo(!addTodo)
   }
 
   const submitEdit = (editedDescription) => {
-    console.log(preEditInfo)
-
     let tempTodos = JSON.parse(localStorage.getItem('todos'))
 
     tempTodos.forEach((todo) => {
@@ -100,6 +94,7 @@ const closeTodo = (orderNumber) => {
 
   return (
       <div className="App">
+        <GithubLink />
         <header id="app-header">
         <img id="custy-logo" src={logo} alt="Logo" />
         </header>

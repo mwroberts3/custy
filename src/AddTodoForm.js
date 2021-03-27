@@ -1,7 +1,7 @@
 const AddTodoForm = ({ addNewTodo }) => {
     return (
         <form id="add-todo-form">
-           <label>Order Number:</label>
+           <label>Reference Number:</label>
            <input id="newTodoOrderNumber" type="text" autoFocus/> 
            <label>Todo:</label>
            <textarea id="newTodoDescription"></textarea>

@@ -1,15 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
 * {
   padding: 0;
   margin: 0;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Quicksand", sans-serif;
 }
 
 body {
   margin: 0 10px;
 }
 
-.app {
+.App {
   position: relative;
+  width: 100%;
 }
 
 h1 {
@@ -25,6 +28,21 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 10px 0;
+}
+
+#github-link a {
+  color: #bbb;
+}
+
+#github-link a:hover {
+  color: #666;
+}
+
+#github-link {
+  position: absolute;
+  left: 20px;
+  top: 15px;
 }
 
 button {
@@ -34,8 +52,14 @@ button {
   border: 1px solid #88a7b9;
 }
 
+#addTodoBtn {
+  margin-bottom: 5px;
+}
+
 #add-todo-form,
 #edit-todo-form {
+  font-size: 18px;
+  width: 280px;
   position: absolute;
   top: 100px;
   right: 50%;
@@ -53,11 +77,17 @@ button {
 #add-todo-form textarea,
 #edit-todo-form input,
 #edit-todo-form textarea {
+  font-size: 18px;
   margin-bottom: 10px;
   width: 90%;
   border: 1px solid #777;
   border-radius: 5px;
   padding: 5px;
+}
+
+#add-todo-form textarea,
+#edit-todo-form textarea {
+  height: 90px;
 }
 
 #customer-service-todo {
@@ -73,30 +103,47 @@ button {
 }
 
 .customer-service-card {
+  position: relative;
   height: 150px;
   background: #333;
   color: #fff;
   border-radius: 10px;
-  border: 2px solid #88a7b9;
   padding: 15px;
   margin: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .customer-service-card hr {
+  position: absolute;
+  top: 30px;
   margin-bottom: 10px;
 }
 
 .customer-service-card p {
-  width: 75%;
-  text-align: justify;
+  margin-top: 70px;
+  font-size: 18px;
+  width: 100%;
+  text-align: left;
+}
+
+.customer-service-card-order-number {
+  position: absolute;
+  top: 40px;
+}
+
+.customer-service-card-order-date {
+  position: absolute;
+  top: 65px;
 }
 
 .csc-options {
-  width: 100%;
+  position: absolute;
+  top: 5px;
+  width: 90%;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
