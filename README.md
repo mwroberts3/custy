@@ -1,15 +1,28 @@
 # Custy
 
-**Version** 1.0.0
-**Date** 3/26/21
-**License** MIT
+**Version:** 1.0.0
+<br>
+**Release:** 3/26/21
+<br>
+**License:** MIT
+<br>
+https://custy.netlify.app/
 
-Simple customer service tracker built with React.
+## Usage & Features
 
-Stores and retrieves data using local storage, so it's well suited for a dedicated work computer.
+_Custy_ is a simple browser based customer service tracker built with React.
+
+This app stores and retrieves data using local storage, so it's well suited for a dedicated work computer.
+
+Added todos can be marked as "urgent" or "waiting for response".
 
 ## Future Features
 
-Would be nice to be able to setup a reminder system
+- reminder feature
+- undo delete
+- some kind of web-socket use so changes are reflected in all browser instances
+- dark mode
 
-An undo feature that allows you to retrieve accidentally deleted todos
+## Contributions
+
+Contributions are welcome, please email mwroberts89@gmail.com
