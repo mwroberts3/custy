@@ -1,6 +1,6 @@
 # Custy
 
-**Version:** 1.0.0
+**Version:** 1.0.1
 <br>
 **Release:** 3/26/21
 <br>
@@ -22,6 +22,13 @@ Added todos can be marked as "urgent" or "waiting for response".
 - undo delete
 - some kind of web-socket use so changes are reflected in all browser instances
 - dark mode
+
+## Version Changes
+
+1.0.1 - 3/29/21
+
+- fixed bug that displayed add and edit todo forms simultaneously
+- added 10px margin to top of the add and edit forms, so there's some separation with the button
 
 ## Contributions
 

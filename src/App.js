@@ -43,7 +43,9 @@ function App() {
     }
     setPreEditInfo(tempEdit)
     setEditCheck(!editCheck)
-    setAddTodo(!addTodo)
+    if (addTodo) {
+      setAddTodo(!addTodo)
+    }
   }
 
   const submitEdit = (editedDescription) => {
