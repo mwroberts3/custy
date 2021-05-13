@@ -1,11 +1,9 @@
 # Custy
 
-**Version:** 1.0.1
-<br>
+**Version:** 1.0.2
 **Release:** 3/26/21
-<br>
 **License:** MIT
-<br>
+
 https://custy.netlify.app/
 
 ## Usage & Features
@@ -25,7 +23,11 @@ Added todos can be marked as "urgent" or "waiting for response".
 
 ## Version Changes
 
-1.0.1 - 3/29/21
+### v1.0.2 - 5/13/21
+
+- tweaked CSS grid properties to keep the todo cells centered on the screen
+
+### v1.0.1 - 3/29/21
 
 - fixed bug that displayed add and edit todo forms simultaneously
 - added 10px margin to top of the add and edit forms, so there's some separation with the button
