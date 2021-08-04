@@ -19,6 +19,11 @@ h1 {
   text-align: center;
 }
 
+/* Utils */
+.hidden {
+  display: none !important;
+}
+
 #custy-logo {
   width: 120px;
 }
@@ -33,6 +38,7 @@ h1 {
 
 #github-link a {
   color: #bbb;
+  transition: all 0.4s ease;
 }
 
 #github-link a:hover {
@@ -52,12 +58,16 @@ button {
   border: 1px solid #88a7b9;
 }
 
-#addTodoBtn {
+#addTodoBtn,
+#addBBoardItemBtn {
   margin-bottom: 5px;
+  margin-left: 5px;
+  cursor: pointer;
 }
 
 #add-todo-form,
-#edit-todo-form {
+#edit-todo-form,
+#add-bbitem-form {
   font-size: 18px;
   width: 280px;
   position: absolute;
@@ -105,9 +115,10 @@ button {
 .customer-service-card {
   position: relative;
   height: 150px;
-  background: #333;
+  background: #444;
   color: #fff;
   border-radius: 10px;
+  box-shadow: 3px 3px #222;
   padding: 15px;
   margin: 5px;
   display: flex;
@@ -164,4 +175,51 @@ button {
 
 .waiting {
   background: #642e64;
+}
+
+/* Bulletin Board */
+#bulletin-board {
+  font-weight: bold;
+  margin: auto;
+  height: 40px;
+  background-color: rgb(247, 236, 189);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+.bboard-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.bulletin-board-item {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.bulletin-board-spacer {
+  margin-top: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #000;
+  user-select: none;
+}
+
+.bboard-item-contents {
+  position: absolute;
+  width: 400px;
+  top: 200px;
+  right: 50%;
+  transform: translate(50%, 50%);
+  padding: 10px;
+  background: #777;
+  color: #fff;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

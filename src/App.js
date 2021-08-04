@@ -3,15 +3,27 @@ import { useState } from 'react'
 import logo from './custy-logo.jpg'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
+import AddBBoardItem from './AddBBoardItem';
 import AddTodoForm from './AddTodoForm'
 import EditTodoForm from './EditTodoForm'
 import GithubLink from './GithubLink'
+import BulletinBoard from './BulletinBoard';
+import BBoardItemContents from './BBoardItemContents';
+import AddBBItemForm from './AddBBItemForm';
 
 function App() {
+  // bulletin board test data
+  // let bbTestData = [{name: 'applying discounts in NS',desc: 'applying discounts in NS description'}, {name: 'refunds',desc: 'refunds description'},
+  // {name: 'manufacturer contact', desc:'manufacturer contact desc'}]
+  // localStorage.setItem('bulletinBoard',JSON.stringify(bbTestData))
+
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
+  const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
+  const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
+  const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
 
   const showAddTodoForm = () =>{
     setAddTodo(!addTodo)
@@ -104,10 +116,15 @@ const closeTodo = (orderNumber) => {
           width:'100%', display: 'flex', justifyContent: 'center'
           }}>
           <AddTodo showAddTodoForm={showAddTodoForm} showEditTodoForm={showEditTodoForm} addTodo={addTodo} editCheck={editCheck}/>
+          <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem}/>
         </div>
+        <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
+        setSelectedBBoardItemContents={setSelectedBBoardItemContents}/>
         <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
+        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem}/>}
+        <BBoardItemContents contents={selectedBBoardItemContents}/>
       </div>
   );
 }
