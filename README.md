@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.0.2
-**Release:** 3/26/21
+**Version:** 1.1
+**Release:** 8/5/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -22,6 +22,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version Changes
+
+### v1.1 - 8/5/21
+
+- added a bulletin board feature that spans the top of the page, which allows users to leave more permanent notes in their Custy workspace
 
 ### v1.0.2 - 5/13/21
 

@@ -3,19 +3,19 @@ import { useState } from 'react'
 import logo from './custy-logo.jpg'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
-import AddBBoardItem from './AddBBoardItem';
+import AddBBoardItem from './bulletinboard/AddBBoardItem';
 import AddTodoForm from './AddTodoForm'
 import EditTodoForm from './EditTodoForm'
 import GithubLink from './GithubLink'
-import BulletinBoard from './BulletinBoard';
-import BBoardItemContents from './BBoardItemContents';
-import AddBBItemForm from './AddBBItemForm';
+import BulletinBoard from './bulletinboard/BulletinBoard';
+import BBoardItemContents from './bulletinboard/BBoardItemContents';
+import AddBBItemForm from './bulletinboard/AddBBItemForm';
 
 function App() {
-  // bulletin board test data
-  // let bbTestData = [{name: 'applying discounts in NS',desc: 'applying discounts in NS description'}, {name: 'refunds',desc: 'refunds description'},
-  // {name: 'manufacturer contact', desc:'manufacturer contact desc'}]
-  // localStorage.setItem('bulletinBoard',JSON.stringify(bbTestData))
+  // bulletin board check
+  if (!localStorage.getItem('bulletinBoard')) {
+    localStorage.setItem('bulletinBoard', JSON.stringify([]))
+  }
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
@@ -124,7 +124,7 @@ const closeTodo = (orderNumber) => {
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
         {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem}/>}
-        <BBoardItemContents contents={selectedBBoardItemContents}/>
+        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} />
       </div>
   );
 }

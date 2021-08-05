@@ -84,7 +84,9 @@ button {
 }
 
 #add-todo-form input,
+#add-bbitem-form input,
 #add-todo-form textarea,
+#add-bbitem-form textarea,
 #edit-todo-form input,
 #edit-todo-form textarea {
   font-size: 18px;
@@ -170,11 +172,11 @@ button {
 }
 
 .urgent {
-  background: #b30000;
+  background: #7e0000;
 }
 
 .waiting {
-  background: #642e64;
+  background: #441f44;
 }
 
 /* Bulletin Board */
@@ -188,6 +190,7 @@ button {
   align-items: center;
   justify-content: flex-start;
   overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .bboard-item-container {
@@ -209,11 +212,12 @@ button {
   user-select: none;
 }
 
-.bboard-item-contents {
+.bboard-item-contents-container {
   position: absolute;
   width: 400px;
-  top: 200px;
+  top: -120px;
   right: 50%;
+  height: 500px;
   transform: translate(50%, 50%);
   padding: 10px;
   background: #777;
@@ -222,4 +226,8 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.bboard-item-contents-container button {
+  margin-top: 10px;
 }
