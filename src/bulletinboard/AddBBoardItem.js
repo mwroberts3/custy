@@ -1,11 +1,7 @@
-const AddBBoardItem = ({setAddNewBBoardItem, addNewBBoardItem}) => {
-    const addNewItemToBBoard = () => {
-        setAddNewBBoardItem(true)
-    }
-
+const AddBBoardItem = ({setAddNewBBoardItem, addNewBBoardItem, addTodo, editCheck}) => {
     if (!addNewBBoardItem) {
         return (
-            <button id="addBBoardItemBtn" onClick={() => addNewItemToBBoard()}>
+            <button id="addBBoardItemBtn" onClick={() => {if (!addTodo && !editCheck) setAddNewBBoardItem(true)}}>
                 Add Board Item
             </button>
         )

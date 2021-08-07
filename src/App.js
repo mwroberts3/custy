@@ -26,7 +26,9 @@ function App() {
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
 
   const showAddTodoForm = () =>{
-    setAddTodo(!addTodo)
+    if (addNewBBoardItem) {
+      setAddTodo(!addTodo)
+    }
   }
   
   const showEditTodoForm = () =>{
@@ -115,16 +117,16 @@ const closeTodo = (orderNumber) => {
         <div style={{
           width:'100%', display: 'flex', justifyContent: 'center'
           }}>
-          <AddTodo showAddTodoForm={showAddTodoForm} showEditTodoForm={showEditTodoForm} addTodo={addTodo} editCheck={editCheck}/>
-          <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem}/>
+          <AddTodo showEditTodoForm={showEditTodoForm} addTodo={addTodo} editCheck={editCheck} addNewBBoardItem={addNewBBoardItem} setAddTodo={setAddTodo}/>
+          <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem} addTodo={addTodo} editCheck={editCheck}/>
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
         setSelectedBBoardItemContents={setSelectedBBoardItemContents}/>
         <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
-        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem}/>}
-        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} />
+        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem} />}
+        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}/>
       </div>
   );
 }

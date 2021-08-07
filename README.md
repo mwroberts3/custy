@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.1
-**Release:** 8/5/21
+**Version:** 1.1.1
+**Release:** 8/7/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -21,7 +21,12 @@ Added todos can be marked as "urgent" or "waiting for response".
 - some kind of web-socket use so changes are reflected in all browser instances
 - dark mode
 
-## Version Changes
+## Version History
+
+### v1.1 - 8/7/21
+
+- fixed bulletin board items content container, so it can display longer items
+- fixed size of bulletin board banner, so it's flush with the todo cards
 
 ### v1.1 - 8/5/21
 

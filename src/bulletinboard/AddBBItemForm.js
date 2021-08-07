@@ -18,13 +18,13 @@ const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem }) => {
 
     return (
         <form id="add-bbitem-form">
-           <label>Header:</label>
-           <input id="bbItemHeader" type="text" autoFocus/> 
-           <label>Content (html):</label>
-           <textarea id="newBBItemContent"></textarea>
-           <button onClick={(e)=>{
-               submitBBoardItem(e)
-           }}>Submit</button>
+            <label>Header:</label>
+            <input id="bbItemHeader" type="text" autoFocus/> 
+            <label>Content (html):</label>
+            <textarea id="newBBItemContent"></textarea>
+            <button onClick={(e)=>{
+                submitBBoardItem(e)
+            }}>Submit</button>
         </form>
     )
 }
