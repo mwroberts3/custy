@@ -26,6 +26,11 @@ h1 {
 
 #custy-logo {
   width: 120px;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 #app-header {
@@ -36,6 +41,25 @@ h1 {
   margin: 10px 0;
 }
 
+#icons-container {
+  display: flex;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+#restore-last-todo {
+  color: #bbb;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-left: 10px;
+  transition: all 0.4s ease;
+}
+
+#restore-last-todo:hover {
+  color: #666;
+}
+
 #github-link a {
   color: #bbb;
   transition: all 0.4s ease;
@@ -43,12 +67,6 @@ h1 {
 
 #github-link a:hover {
   color: #666;
-}
-
-#github-link {
-  position: absolute;
-  left: 20px;
-  top: 15px;
 }
 
 button {

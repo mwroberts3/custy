@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react'
 import logo from './custy-logo.jpg'
+import { FaTrashRestore } from 'react-icons/fa'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
 import AddBBoardItem from './bulletinboard/AddBBoardItem';
@@ -19,22 +20,13 @@ function App() {
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
+  const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
-
-  const showAddTodoForm = () =>{
-    if (addNewBBoardItem) {
-      setAddTodo(!addTodo)
-    }
-  }
   
-  const showEditTodoForm = () =>{
-    setEditCheck(!editCheck)
-  }
-
   const addNewTodo = (orderNumber, todo) => {
     let currentTodos = []
 
@@ -99,30 +91,76 @@ const setTodoWaiting = (orderNumber) => {
     setTodos(JSON.parse(localStorage.getItem('todos')))
 }
 
-const closeTodo = (orderNumber) => {
-    let editedTodos;
+const closeTodo = (e, orderNumber) => {
+  let editedTodos
+  
+  editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
+  
+  localStorage.setItem('todos', JSON.stringify(editedTodos))
+  setTodos(JSON.parse(localStorage.getItem('todos')))
 
-    editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
+  // storing deleting todo in hidden localstorage array
+  let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
 
-    localStorage.setItem('todos', JSON.stringify(editedTodos))
-    setTodos(JSON.parse(localStorage.getItem('todos')))
+  let deletedTodosList = []
+
+  if (localStorage.getItem('deleted-todos')) {
+    deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
+
+    deletedTodosList.push(deletedTodo[0])
+
+    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
+  } else {
+    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
+  }
+}
+
+const restoreTodo = () => {
+  let currentTodos = []
+
+  if (localStorage.getItem('todos')) {
+    currentTodos = JSON.parse(localStorage.getItem('todos'))
+  } 
+
+  if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
+    let restoredTodoList
+
+    restoredTodoList = JSON.parse(localStorage.getItem('deleted-todos'))
+
+    restoredTodoList = restoredTodoList.reverse()
+
+    let restoredTodo = restoredTodoList[0]
+
+    restoredTodoList = restoredTodoList.filter(todo => todo !== restoredTodo)
+    localStorage.setItem('deleted-todos', JSON.stringify(restoredTodoList))
+
+    currentTodos.push(restoredTodo)
+
+    localStorage.setItem('todos', JSON.stringify(currentTodos))
+
+    setTodos(currentTodos)
+  } else {
+    alert('all todos restored')
+  }
 }
 
   return (
       <div className="App">
-        <GithubLink />
+        <div id="icons-container">
+          <GithubLink /><FaTrashRestore id="restore-last-todo" onClick={() => {restoreTodo()}}/>
+        </div>
         <header id="app-header">
         <img id="custy-logo" src={logo} alt="Logo" />
         </header>
         <div style={{
           width:'100%', display: 'flex', justifyContent: 'center'
           }}>
-          <AddTodo showEditTodoForm={showEditTodoForm} addTodo={addTodo} editCheck={editCheck} addNewBBoardItem={addNewBBoardItem} setAddTodo={setAddTodo}/>
+          <AddTodo addTodo={addTodo} editCheck={editCheck} addNewBBoardItem={addNewBBoardItem} setAddTodo={setAddTodo} setEditCheck={setEditCheck} />
           <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem} addTodo={addTodo} editCheck={editCheck}/>
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
         setSelectedBBoardItemContents={setSelectedBBoardItemContents}/>
-        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo}/>
+        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
         {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem} />}
