@@ -1,13 +1,13 @@
 import './App.css';
 import { useState } from 'react'
 import logo from './custy-logo.jpg'
-import { FaTrashRestore } from 'react-icons/fa'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
 import AddBBoardItem from './bulletinboard/AddBBoardItem';
 import AddTodoForm from './AddTodoForm'
 import EditTodoForm from './EditTodoForm'
 import GithubLink from './GithubLink'
+import RestoreTodo from './RestoreTodo'
 import BulletinBoard from './bulletinboard/BulletinBoard';
 import BBoardItemContents from './bulletinboard/BBoardItemContents';
 import AddBBItemForm from './bulletinboard/AddBBItemForm';
@@ -20,7 +20,7 @@ function App() {
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
-  const [freshDeleted, setFreshDeleted] = useState(false)
+  const [freshDeleted, setFreshDeleted] = useState(null)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)
@@ -92,27 +92,34 @@ const setTodoWaiting = (orderNumber) => {
 }
 
 const closeTodo = (e, orderNumber) => {
-  let editedTodos
-  
-  editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
-  
-  localStorage.setItem('todos', JSON.stringify(editedTodos))
-  setTodos(JSON.parse(localStorage.getItem('todos')))
+  setFreshDeleted(orderNumber)
 
-  // storing deleting todo in hidden localstorage array
-  let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
+  // set timer for quick undo
+  setTimeout(() => {
+    let editedTodos
+    
+    editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
+    
+    localStorage.setItem('todos', JSON.stringify(editedTodos))
+    setTodos(JSON.parse(localStorage.getItem('todos')))
 
-  let deletedTodosList = []
+    // storing deleting todo in hidden localstorage array
+    let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
 
-  if (localStorage.getItem('deleted-todos')) {
-    deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
+    let deletedTodosList = []
 
-    deletedTodosList.push(deletedTodo[0])
+    if (localStorage.getItem('deleted-todos')) {
+      deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
 
-    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
-  } else {
-    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
-  }
+      deletedTodosList.push(deletedTodo[0])
+
+      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
+    } else {
+      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
+    }
+
+    setFreshDeleted(null)
+  }, 1000)
 }
 
 const restoreTodo = () => {
@@ -120,34 +127,38 @@ const restoreTodo = () => {
 
   if (localStorage.getItem('todos')) {
     currentTodos = JSON.parse(localStorage.getItem('todos'))
+
+    document.querySelector('#restore-last-todo').classList.add('restore-enabled')
   } 
 
-  if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
-    let restoredTodoList
-
-    restoredTodoList = JSON.parse(localStorage.getItem('deleted-todos'))
-
-    restoredTodoList = restoredTodoList.reverse()
-
-    let restoredTodo = restoredTodoList[0]
-
-    restoredTodoList = restoredTodoList.filter(todo => todo !== restoredTodo)
-    localStorage.setItem('deleted-todos', JSON.stringify(restoredTodoList))
-
-    currentTodos.push(restoredTodo)
-
-    localStorage.setItem('todos', JSON.stringify(currentTodos))
-
-    setTodos(currentTodos)
-  } else {
-    alert('all todos restored')
+  if (localStorage.getItem('deleted-todos')) {
+    if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
+      let restoredTodoList
+  
+      restoredTodoList = JSON.parse(localStorage.getItem('deleted-todos'))
+  
+      restoredTodoList = restoredTodoList.reverse()
+  
+      let restoredTodo = restoredTodoList[0]
+  
+      restoredTodoList = restoredTodoList.filter(todo => todo !== restoredTodo)
+      localStorage.setItem('deleted-todos', JSON.stringify(restoredTodoList))
+  
+      currentTodos.push(restoredTodo)
+  
+      localStorage.setItem('todos', JSON.stringify(currentTodos))
+  
+      setTodos(currentTodos)
+    } else {
+      alert('all todos restored')
+    }
   }
 }
 
   return (
       <div className="App">
         <div id="icons-container">
-          <GithubLink /><FaTrashRestore id="restore-last-todo" onClick={() => {restoreTodo()}}/>
+          <GithubLink /><RestoreTodo restoreTodo={restoreTodo}/>
         </div>
         <header id="app-header">
         <img id="custy-logo" src={logo} alt="Logo" />
