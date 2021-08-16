@@ -95,31 +95,33 @@ const closeTodo = (e, orderNumber) => {
   setFreshDeleted(orderNumber)
 
   // set timer for quick undo
-  setTimeout(() => {
-    let editedTodos
+    setTimeout(() => {
+      if (!setFreshDeleted) {
+        let editedTodos
+        
+        editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
+        
+        localStorage.setItem('todos', JSON.stringify(editedTodos))
+        setTodos(JSON.parse(localStorage.getItem('todos')))
     
-    editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
+        // storing deleting todo in hidden localstorage array
+        let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
     
-    localStorage.setItem('todos', JSON.stringify(editedTodos))
-    setTodos(JSON.parse(localStorage.getItem('todos')))
-
-    // storing deleting todo in hidden localstorage array
-    let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
-
-    let deletedTodosList = []
-
-    if (localStorage.getItem('deleted-todos')) {
-      deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
-
-      deletedTodosList.push(deletedTodo[0])
-
-      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
-    } else {
-      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
-    }
-
-    setFreshDeleted(null)
-  }, 1000)
+        let deletedTodosList = []
+    
+        if (localStorage.getItem('deleted-todos')) {
+          deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
+    
+          deletedTodosList.push(deletedTodo[0])
+    
+          localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
+        } else {
+          localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
+        }
+    
+        setFreshDeleted(null) 
+      }
+    }, 2000)
 }
 
 const restoreTodo = () => {
@@ -171,7 +173,7 @@ const restoreTodo = () => {
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
         setSelectedBBoardItemContents={setSelectedBBoardItemContents}/>
-        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted}/>
+        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
         {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem} />}

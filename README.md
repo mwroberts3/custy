@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.1.1
-**Release:** 8/7/21
+**Version:** 1.3
+**Release:** 8/16/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -22,6 +22,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.3.0 - 8/16/21
+
+- added an 'urgent undo' feature that lets users restore a closed todo immediately by clicking a temporary undo button that appears after closing
 
 ### v1.2.0 - 8/12/21
 

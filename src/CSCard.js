@@ -1,4 +1,4 @@
-const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit, freshDeleted}) => {
+const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit, freshDeleted, setFreshDeleted}) => {
 
     return (        
         <div>
@@ -12,7 +12,9 @@ const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit, f
             }}>{todo.todo}</p>
             </div>
           :
-          <div className="urgent-undo"><button>Undo</button></div>
+          <div className="urgent-undo" onClick={() => {
+              setFreshDeleted(false)
+          }}><button className="undo-btn">Undo</button></div>
         }
         </div>
     )
