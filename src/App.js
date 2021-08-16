@@ -96,7 +96,7 @@ const closeTodo = (e, orderNumber) => {
 
   // set timer for quick undo
     setTimeout(() => {
-      if (!setFreshDeleted) {
+      if (setFreshDeleted !== 'deleted') {
         let editedTodos
         
         editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
@@ -118,8 +118,10 @@ const closeTodo = (e, orderNumber) => {
         } else {
           localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
         }
-    
         setFreshDeleted(null) 
+        console.log(freshDeleted)
+      } else {
+        console.log(freshDeleted)
       }
     }, 2000)
 }

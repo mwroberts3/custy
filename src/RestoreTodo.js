@@ -2,7 +2,7 @@ import React from 'react'
 import { FaTrashRestore } from 'react-icons/fa'
 
 const RestoreTodo = ({restoreTodo}) => {
-    if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
+    if (localStorage.getItem('deleted-todos') && JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
         return (
             <div id="restore-last-todo" className="restore-enabled">
                 <FaTrashRestore onClick={() => {

@@ -13,7 +13,7 @@ const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit, f
             </div>
           :
           <div className="urgent-undo" onClick={() => {
-              setFreshDeleted(false)
+              setFreshDeleted('deleted')
           }}><button className="undo-btn">Undo</button></div>
         }
         </div>
