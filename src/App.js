@@ -91,12 +91,14 @@ const setTodoWaiting = (orderNumber) => {
     setTodos(JSON.parse(localStorage.getItem('todos')))
 }
 
-const closeTodo = (e, orderNumber) => {
-  setFreshDeleted(orderNumber)
-
+const closeTodo = (orderNumber) => {
   // set timer for quick undo
-    setTimeout(() => {
-      if (setFreshDeleted !== 'deleted') {
+  setFreshDeleted(orderNumber)
+  
+  setTimeout(() => {
+    console.log(orderNumber)
+
+    if (freshDeleted === orderNumber) {
         let editedTodos
         
         editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
@@ -118,11 +120,8 @@ const closeTodo = (e, orderNumber) => {
         } else {
           localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
         }
-        setFreshDeleted(null) 
-        console.log(freshDeleted)
-      } else {
-        console.log(freshDeleted)
       }
+      setFreshDeleted(null) 
     }, 2000)
 }
 

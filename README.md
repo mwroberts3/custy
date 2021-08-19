@@ -23,6 +23,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 
 ## Version History
 
+### v1.3.1 - 8/18/21
+
+- fixed 'urgent undo' feature
+
 ### v1.3.0 - 8/16/21
 
 - added an 'urgent undo' feature that lets users restore a closed todo immediately by clicking a temporary undo button that appears after closing
