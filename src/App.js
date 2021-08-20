@@ -21,6 +21,7 @@ function App() {
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
   const [freshDeleted, setFreshDeleted] = useState(null)
+  const [todosToBeClosed, setTodosToBeClosed] = useState([])
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)
@@ -89,45 +90,50 @@ const setTodoWaiting = (orderNumber) => {
 
     localStorage.setItem('todos', JSON.stringify(todos))
     setTodos(JSON.parse(localStorage.getItem('todos')))
-}
+  }
 
-const closeTodo = (orderNumber) => {
-  // set timer for quick undo
-  setFreshDeleted(orderNumber)
+let closeTimer = 0
+let tempTodos = todos
+const closeTodo = (e, orderNumber) => {
   
-  setTimeout(() => {
-    console.log(orderNumber)
+  
+  e.target.parentNode.parentNode.parentNode.innerHTML = `
+  <div id="testDelete-${orderNumber}" class="urgent-undo">
+  <button class="undo-btn">Undo</button>
+  </div>
+  `
+    
+  tempTodos = tempTodos.filter(todo => todo.orderNumber !== orderNumber)
+  
+  console.log(tempTodos)
+  
+  localStorage.setItem('todos', JSON.stringify(tempTodos))
+  
+  // storing deleting todo in hidden localstorage array
+  let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
+  
+  let deletedTodosList = []
+  
+  if (localStorage.getItem('deleted-todos')) {
+    deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
+    
+    deletedTodosList.push(deletedTodo[0])
+    
+    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
+  } else {
+    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
+  }
 
-    if (freshDeleted === orderNumber) {
-        let editedTodos
-        
-        editedTodos = todos.filter(todo => todo.orderNumber !== orderNumber)
-        
-        localStorage.setItem('todos', JSON.stringify(editedTodos))
-        setTodos(JSON.parse(localStorage.getItem('todos')))
-    
-        // storing deleting todo in hidden localstorage array
-        let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
-    
-        let deletedTodosList = []
-    
-        if (localStorage.getItem('deleted-todos')) {
-          deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
-    
-          deletedTodosList.push(deletedTodo[0])
-    
-          localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
-        } else {
-          localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
-        }
-      }
-      setFreshDeleted(null) 
-    }, 2000)
+  closeTimer += 2000
+  const closeTodosCue = setInterval(() => {
+    setTodos(tempTodos)
+    clearInterval(closeTodosCue)
+  }, closeTimer)
 }
 
 const restoreTodo = () => {
   let currentTodos = []
-
+  
   if (localStorage.getItem('todos')) {
     currentTodos = JSON.parse(localStorage.getItem('todos'))
 
