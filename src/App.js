@@ -21,7 +21,6 @@ function App() {
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
   const [freshDeleted, setFreshDeleted] = useState(null)
-  const [todosToBeClosed, setTodosToBeClosed] = useState([])
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)

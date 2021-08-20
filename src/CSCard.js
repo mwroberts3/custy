@@ -1,4 +1,4 @@
-const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit, freshDeleted, setFreshDeleted}) => {
+const CSCard = ({todo, setTodoUrgent, setTodoWaiting, closeTodo, initiateEdit}) => {
 
     return (        
         <div>
