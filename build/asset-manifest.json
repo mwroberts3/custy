@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.328482d6.chunk.css",
-    "main.js": "/static/js/main.1ff5f577.chunk.js",
-    "main.js.map": "/static/js/main.1ff5f577.chunk.js.map",
+    "main.css": "/static/css/main.16fa0012.chunk.css",
+    "main.js": "/static/js/main.b8bca411.chunk.js",
+    "main.js.map": "/static/js/main.b8bca411.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.35c92a89.js",
     "runtime-main.js.map": "/static/js/runtime-main.35c92a89.js.map",
     "static/js/2.f1bf4c38.chunk.js": "/static/js/2.f1bf4c38.chunk.js",
     "static/js/2.f1bf4c38.chunk.js.map": "/static/js/2.f1bf4c38.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.328482d6.chunk.css.map": "/static/css/main.328482d6.chunk.css.map",
+    "static/css/main.16fa0012.chunk.css.map": "/static/css/main.16fa0012.chunk.css.map",
     "static/js/2.f1bf4c38.chunk.js.LICENSE.txt": "/static/js/2.f1bf4c38.chunk.js.LICENSE.txt",
     "static/media/custy-logo.96d22885.jpg": "/static/media/custy-logo.96d22885.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.35c92a89.js",
     "static/js/2.f1bf4c38.chunk.js",
-    "static/css/main.328482d6.chunk.css",
-    "static/js/main.1ff5f577.chunk.js"
+    "static/css/main.16fa0012.chunk.css",
+    "static/js/main.b8bca411.chunk.js"
   ]
 }

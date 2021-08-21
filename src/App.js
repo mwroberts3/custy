@@ -20,7 +20,7 @@ function App() {
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
-  const [freshDeleted, setFreshDeleted] = useState(null)
+  const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [editCheck, setEditCheck] = useState(false)
@@ -91,43 +91,60 @@ const setTodoWaiting = (orderNumber) => {
     setTodos(JSON.parse(localStorage.getItem('todos')))
   }
 
-let closeTimer = 0
 let tempTodos = todos
-const closeTodo = (e, orderNumber) => {
-  
+const closeTodo = (e, todo) => {
+  const undoTimerInt = setInterval(() => {
+    tempTodos = tempTodos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)
+    
+    localStorage.setItem('todos', JSON.stringify(tempTodos))
+    
+    // storing deleting todo in hidden localstorage array
+    let deletedTodo = todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)
+    
+    let deletedTodosList = []
+    
+    if (localStorage.getItem('deleted-todos')) {
+      deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
+      
+      deletedTodosList.push(deletedTodo[0])
+      
+      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
+    } else {
+      localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
+    }
+
+    document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
+    
+    console.log(document.querySelectorAll('.todoToBeClosed').length)
+    
+    clearInterval(undoTimerInt)
+    setTodos(tempTodos)
+  }, 2000) 
+
+  let selectedTodo = e.target.parentNode.parentNode.parentNode.innerHTML
   
   e.target.parentNode.parentNode.parentNode.innerHTML = `
-  <div id="testDelete-${orderNumber}" class="urgent-undo">
+  <div id="testDelete-${todo.orderNumber}" class="urgent-undo todoToBeClosed">
   <button class="undo-btn">Undo</button>
   </div>
   `
-    
-  tempTodos = tempTodos.filter(todo => todo.orderNumber !== orderNumber)
-  
-  console.log(tempTodos)
-  
-  localStorage.setItem('todos', JSON.stringify(tempTodos))
-  
-  // storing deleting todo in hidden localstorage array
-  let deletedTodo = todos.filter(todo => todo.orderNumber === orderNumber)
-  
-  let deletedTodosList = []
-  
-  if (localStorage.getItem('deleted-todos')) {
-    deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
-    
-    deletedTodosList.push(deletedTodo[0])
-    
-    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodosList))
-  } else {
-    localStorage.setItem('deleted-todos', JSON.stringify(deletedTodo))
-  }
 
-  closeTimer += 2000
-  const closeTodosCue = setInterval(() => {
-    setTodos(tempTodos)
-    clearInterval(closeTodosCue)
-  }, closeTimer)
+  document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
+    console.log('urgent undo test')
+
+    document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('urgent-undo')
+
+    document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
+
+    document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo
+    clearInterval(undoTimerInt)
+
+    console.log(document.querySelectorAll('.todoToBeClosed').length)
+    if (document.querySelectorAll('.todoToBeClosed').length < 1) {
+      setTodos([]) 
+      setTodos(tempTodos)
+    }
+  })
 }
 
 const restoreTodo = () => {
