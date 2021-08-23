@@ -1,6 +1,6 @@
 # Custy
 
-**Version:** 1.4
+**Version:** 1.4.1
 **Release:** 8/22/21
 **License:** MIT
 

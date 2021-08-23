@@ -1,6 +1,10 @@
 import { FaMoon, FaSun } from 'react-icons/fa'
 
 const NightMode = ({lightTheme, setLightTheme}) => {
+    if (!lightTheme && !localStorage.getItem('light-theme')) {
+        setLightTheme(true)
+    }
+
     if (lightTheme) {
         localStorage.setItem('light-theme', true)
         
