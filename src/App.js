@@ -6,8 +6,9 @@ import AddTodo from './AddTodo'
 import AddBBoardItem from './bulletinboard/AddBBoardItem';
 import AddTodoForm from './AddTodoForm'
 import EditTodoForm from './EditTodoForm'
-import GithubLink from './GithubLink'
-import RestoreTodo from './RestoreTodo'
+import GithubLink from './navbar/GithubLink'
+import RestoreTodo from './navbar/RestoreTodo'
+import NightMode from './navbar/NightMode'
 import BulletinBoard from './bulletinboard/BulletinBoard';
 import BBoardItemContents from './bulletinboard/BBoardItemContents';
 import AddBBItemForm from './bulletinboard/AddBBItemForm';
@@ -18,6 +19,8 @@ function App() {
     localStorage.setItem('bulletinBoard', JSON.stringify([]))
   }
 
+  const [lightTheme, setLightTheme] = useState(JSON.parse(localStorage.getItem('light-theme')))
+
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
   const [freshDeleted, setFreshDeleted] = useState(false)
@@ -26,7 +29,15 @@ function App() {
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
-  
+
+  window.onfocus = () => {
+    setLightTheme(JSON.parse(localStorage.getItem('light-theme')))
+
+    setTodos(JSON.parse(localStorage.getItem('todos')))
+
+    setBboardItemArray(JSON.parse(localStorage.getItem('bulletinBoard')))
+  }
+
   const addNewTodo = (orderNumber, todo) => {
     let currentTodos = []
 
@@ -183,8 +194,9 @@ const restoreTodo = () => {
   return (
       <div className="App">
         <div id="icons-container">
-          <GithubLink /><RestoreTodo restoreTodo={restoreTodo}/>
+        <NightMode lightTheme={lightTheme} setLightTheme={setLightTheme}/><RestoreTodo restoreTodo={restoreTodo}/>
         </div>
+        <div id="icons-container-2"><GithubLink /></div>
         <header id="app-header">
         <img id="custy-logo" src={logo} alt="Logo" />
         </header>
@@ -195,12 +207,12 @@ const restoreTodo = () => {
           <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem} addTodo={addTodo} editCheck={editCheck}/>
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
-        setSelectedBBoardItemContents={setSelectedBBoardItemContents}/>
-        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
+        setSelectedBBoardItemContents={setSelectedBBoardItemContents} setAddNewBBoardItem={setAddNewBBoardItem}/>
+        <CSCardGrid initiateEdit={initiateEdit} setTodos={setTodos} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
-        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}  setAddNewBBoardItem={setAddNewBBoardItem} />}
-        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}/>
+        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem} />}
+        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem}/>
       </div>
   );
 }

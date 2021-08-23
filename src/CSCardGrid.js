@@ -1,10 +1,6 @@
 import CSCard from './CSCard'
 
-const CSCardGrid = ({initiateEdit, todos, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted}) => {
-    window.onfocus = () => {
-        window.location.reload()
-    }
-
+const CSCardGrid = ({initiateEdit, setTodos, todos, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted}) => {
     return (
         <div id='customer-service-todo'>
             {todos && todos.map((todo) => (

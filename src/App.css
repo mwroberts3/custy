@@ -8,6 +8,7 @@
 
 body {
   margin: 0 10px;
+  transition: all 0.3s linear;
 }
 
 .App {
@@ -31,6 +32,7 @@ h1 {
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+  transition: all 0.3s linear;
 }
 
 #app-header {
@@ -46,6 +48,13 @@ h1 {
   position: absolute;
   left: 20px;
   top: 15px;
+}
+
+#icons-container-2 {
+  display: flex;
+  position: absolute;
+  right: 20px;
+  top: 16px;
 }
 
 #restore-last-todo {
@@ -65,13 +74,20 @@ h1 {
   color: #666 !important;
 }
 
-#github-link a {
+#github-link a,
+#color-theme-icon {
   color: #bbb;
   transition: all 0.4s ease;
 }
 
-#github-link a:hover {
+#github-link a:hover,
+#color-theme-icon:hover {
   color: #666;
+}
+
+#color-theme-icon {
+  margin-top: 2px;
+  cursor: pointer;
 }
 
 button {
@@ -185,7 +201,6 @@ button {
   padding: 15px;
   margin: 5px;
   animation: undoDisolve 2s;
-  /* animation-iteration-count: 1; */
   animation-fill-mode: forwards;
 }
 
@@ -283,4 +298,9 @@ button {
 
 .bboard-item-contents-container button {
   margin-top: 10px;
+  cursor: pointer;
+}
+
+.bboard-item-contents-container div:last-child button:first-child {
+  margin-right: 5px;
 }

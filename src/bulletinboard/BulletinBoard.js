@@ -1,7 +1,7 @@
 import BBoardItem from './BBoardItem'
 import BBoardSpacer from './BulletinBoardSpacer'
 
-const BulletinBoard = ({bboardItemArray, setBboardItemArray, setSelectedBBoardItemContents}) => {
+const BulletinBoard = ({bboardItemArray, setBboardItemArray, setSelectedBBoardItemContents, setAddNewBBoardItem}) => {
     // sort bulletin board in alphabetical order
     bboardItemArray.sort(function(a, b){ 
         if (a.name.toUpperCase() < b.name.toUpperCase()) {
@@ -17,7 +17,7 @@ const BulletinBoard = ({bboardItemArray, setBboardItemArray, setSelectedBBoardIt
         <div id="bulletin-board">
             {bboardItemArray.map((bboard, index) => (
                 <div className="bboard-item-container" key={index}>
-                <BBoardItem  name={bboard.name} desc={bboard.desc}
+                <BBoardItem name={bboard.name} desc={bboard.desc}
                 setSelectedBBoardItemContents={setSelectedBBoardItemContents}
                 /> 
                 {index < bboardItemArray.length -1 && <BBoardSpacer />}
