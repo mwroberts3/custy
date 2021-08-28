@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.4.1
-**Release:** 8/22/21
+**Version:** 1.4.3
+**Release:** 8/26/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -22,6 +22,16 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.4.3 - 8/27/21
+
+- changed the opacity of the urgent undo to make it less likely to cause clicking errors
+
+### v1.4.2 - 8/26/21
+
+- editing bulletin board item is more eloquent and closing the form no longer deletes the item from local storage
+
+- index count for identical reference numbers
 
 ### v1.4.0 - 8/22/21
 

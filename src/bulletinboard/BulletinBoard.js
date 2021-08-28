@@ -1,7 +1,7 @@
 import BBoardItem from './BBoardItem'
 import BBoardSpacer from './BulletinBoardSpacer'
 
-const BulletinBoard = ({bboardItemArray, setBboardItemArray, setSelectedBBoardItemContents, setAddNewBBoardItem}) => {
+const BulletinBoard = ({bboardItemArray, setSelectedBBoardItemContents}) => {
     // sort bulletin board in alphabetical order
     bboardItemArray.sort(function(a, b){ 
         if (a.name.toUpperCase() < b.name.toUpperCase()) {

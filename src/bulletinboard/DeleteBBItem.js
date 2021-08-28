@@ -1,7 +1,7 @@
 const DeleteBBItem = ({deleteBBoardItemFromArray}) => {
     return (
         <button onClick={(e) => {
-            deleteBBoardItemFromArray(e, false)
+            deleteBBoardItemFromArray(e.target.parentNode.parentNode.childNodes[0].textContent)
         }}>
             Delete
         </button>

@@ -1,30 +1,21 @@
-import BBoardItem from './BBoardItem';
 import DeleteBBItem from './DeleteBBItem'
 import EditBBItem from './EditBBItem'
 
-const BBoardItemContents = ({contents, bboardItemArray, setBboardItemArray, setAddNewBBoardItem}) => {
-    const deleteBBoardItemFromArray = (e, fromEdit) => {
-        let itemToBeDeleted = e.target.parentNode.parentNode.childNodes[0].textContent;
-
-        console.log(itemToBeDeleted)
-
-        bboardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
-
-        localStorage.setItem('bulletinBoard', JSON.stringify(bboardItemArray))
-
-        setBboardItemArray(bboardItemArray)
-    }
-
+const BBoardItemContents = ({contents, setAddNewBBoardItem, deleteBBoardItemFromArray, setBBItemToBeDeleted, bbItemToBeDeleted}) => {
     const editBBItemFunc = (e) => {
-        console.log(e.target.parentNode.parentNode.children[0].textContent)
-        console.log(e.target.parentNode.parentNode.children[1].textContent)
-
-        deleteBBoardItemFromArray(e, true)
+        // console.log(e.target.parentNode.parentNode.children[0].textContent)
+        // console.log(e.target.parentNode.parentNode.children[1].textContent)
 
         setAddNewBBoardItem(true)
         
+        setBBItemToBeDeleted(e.target.parentNode.parentNode.children[0].textContent)
+
         setTimeout(() => {
             document.getElementById('bbItemHeader').value = e.target.parentNode.parentNode.children[0].textContent
+
+            bbItemToBeDeleted = e.target.parentNode.parentNode.children[0].textContent
+
+            console.log(bbItemToBeDeleted)
 
             document.getElementById('newBBItemContent').value = e.target.parentNode.parentNode.children[1].textContent
         },50)

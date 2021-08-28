@@ -26,6 +26,7 @@ function App() {
   const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
+  const [bbItemToBeDeleted, setBBItemToBeDeleted] = useState()
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
@@ -44,6 +45,23 @@ function App() {
     if (localStorage.getItem('todos')) {
       currentTodos = JSON.parse(localStorage.getItem('todos'))
     } 
+
+    // check for/edit duplicate orderNumbers
+    let duplicateCount = 1
+
+    let possibleDuplicate = currentTodos.find(todo => todo.orderNumber === orderNumber)
+
+    if(possibleDuplicate) {
+      for (let i=0; i<currentTodos.length; i++) {
+        console.log(currentTodos[i].orderNumber.substring(0, orderNumber.length))
+
+        if (currentTodos[i].orderNumber.substring(0, orderNumber.length + 2) === `${orderNumber} -`) {
+          duplicateCount++
+        }
+      }
+
+      orderNumber = `${orderNumber} - ${duplicateCount}`
+    }
 
     currentTodos.push({orderNumber, todo, date: new Date().toString().substring(0,15), urgent: false, waitingForResponse: false})
 
@@ -191,6 +209,16 @@ const restoreTodo = () => {
   }
 }
 
+const deleteBBoardItemFromArray = (itemToBeDeleted) => {
+  console.log(itemToBeDeleted)
+
+  let tempBBoardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
+
+  localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
+
+  setBboardItemArray(tempBBoardItemArray)
+}
+
   return (
       <div className="App">
         <div id="icons-container">
@@ -211,8 +239,8 @@ const restoreTodo = () => {
         <CSCardGrid initiateEdit={initiateEdit} setTodos={setTodos} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
-        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem} />}
-        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem}/>
+        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem} deleteBBoardItemFromArray={deleteBBoardItemFromArray} bbItemToBeDeleted={bbItemToBeDeleted}/>}
+        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem} setBBItemToBeDeleted={setBBItemToBeDeleted} bbItemToBeDeleted={bbItemToBeDeleted} deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
       </div>
   );
 }

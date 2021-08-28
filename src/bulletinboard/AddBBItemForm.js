@@ -1,4 +1,4 @@
-const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem }) => {
+const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, deleteBBoardItemFromArray, bbItemToBeDeleted }) => {
     const submitBBoardItem = (e) => {
         e.preventDefault()
         let tempBBoardItemArray = bboardItemArray
@@ -10,6 +10,9 @@ const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem }) => {
 
             localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
         }
+
+        console.log(bbItemToBeDeleted)
+        deleteBBoardItemFromArray(bbItemToBeDeleted)
 
         setAddNewBBoardItem(false)
 
