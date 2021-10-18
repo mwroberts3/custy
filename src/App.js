@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react'
-import logo from './custy-logo.jpg'
+import logo from './custy-logo.png'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
 import AddBBoardItem from './bulletinboard/AddBBoardItem';
@@ -31,6 +31,7 @@ function App() {
   const [preEditInfo, setPreEditInfo] = useState({})
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
 
+  // apply light/dark theme upon focus
   window.onfocus = () => {
     setLightTheme(JSON.parse(localStorage.getItem('light-theme')))
 
@@ -38,6 +39,11 @@ function App() {
 
     setBboardItemArray(JSON.parse(localStorage.getItem('bulletinBoard')))
   }
+
+  // dynamic favicon test
+  console.log(document.querySelector('link'))
+
+  // document.querySelector('link').href = "%PUBLIC_URL%/live-urgents.png"
 
   const addNewTodo = (orderNumber, todo) => {
     let currentTodos = []
