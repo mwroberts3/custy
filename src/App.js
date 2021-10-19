@@ -19,7 +19,7 @@ function App() {
     localStorage.setItem('bulletinBoard', JSON.stringify([]))
   }
 
-  const [lightTheme, setLightTheme] = useState(localStorage.getItem('light-theme'))
+  const [lightTheme, setLightTheme] = useState(JSON.parse(localStorage.getItem('light-theme')))
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)

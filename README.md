@@ -1,6 +1,6 @@
 # Custy
 
-**Version:** 1.5
+**Version:** 1.5.1
 **Release:** 10/18/21
 **License:** MIT
 
@@ -22,9 +22,11 @@ Added todos can be marked as "urgent" or "waiting for response".
 
 ## Version History
 
-### v1.5 - 10/18/21
+### v1.5.1 - 10/18/21
 
 - favicon now changes to a icon with red background if there is currently an 'urgent' todo in a user's stack
+
+- fixed night mode bug from previous version. User's preferred display mode will load correctly if window is reloaded after closing
 
 ### v1.4.3 - 8/27/21
 

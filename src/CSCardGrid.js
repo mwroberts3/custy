@@ -7,7 +7,7 @@ const CSCardGrid = ({initiateEdit, todos, setTodoUrgent, setTodoWaiting, closeTo
         let tempUrgentCheck = todos.filter((todo) => !todo.urgent)
 
         if (todos.length !== tempUrgentCheck.length) {
-            document.querySelector('link').href = "https://raw.githubusercontent.com/mwroberts3/custy/master/src/live-urgents.png"
+            document.querySelector('link').href = "https://raw.githubusercontent.com/mwroberts3/custy/master/src/favicon2.ico"
         } else {
             document.querySelector('link').href = "https://raw.githubusercontent.com/mwroberts3/custy/master/public/favicon.ico"
         }

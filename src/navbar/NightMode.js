@@ -1,28 +1,26 @@
 import { FaMoon, FaSun } from 'react-icons/fa'
+import { useEffect } from 'react'
 
 const NightMode = ({lightTheme, setLightTheme}) => {
-    if (!lightTheme && !localStorage.getItem('light-theme')) {
-        setLightTheme(true)
-    }
-
-    if (lightTheme) {
-        localStorage.setItem('light-theme', true)
-        
-        document.getElementsByTagName('BODY')[0].style.background = 'white'
-        
-        if (document.getElementById('custy-logo')) {
-            document.getElementById('custy-logo').style.filter = 'invert(0%)'
+    useEffect(() => {
+        if (lightTheme) {
+            localStorage.setItem('light-theme', true)
+            
+            document.getElementsByTagName('BODY')[0].style.background = 'white'
+            
+            if (document.getElementById('custy-logo')) {
+                document.getElementById('custy-logo').style.filter = 'invert(0%)'
+            }
+        } else {
+            localStorage.setItem('light-theme', false)
+    
+            document.getElementsByTagName('BODY')[0].style.background = 'black'
+    
+            if (document.getElementById('custy-logo')) {
+                document.getElementById('custy-logo').style.filter = 'invert(100%)'
+            } 
         }
-    } else {
-        localStorage.setItem('light-theme', false)
-
-        document.getElementsByTagName('BODY')[0].style.background = 'black'
-
-        if (document.getElementById('custy-logo')) {
-            document.getElementById('custy-logo').style.filter = 'invert(100%)'
-        } 
-    }
-
+    })
 
     return (
         <div id="color-theme-icon">
