@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.4.3
-**Release:** 8/26/21
+**Version:** 1.5
+**Release:** 10/18/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -17,11 +17,14 @@ Added todos can be marked as "urgent" or "waiting for response".
 ## Future Features
 
 - reminder feature
-- undo delete
 - some kind of web-socket use so changes are reflected in all browser instances
 - dark mode
 
 ## Version History
+
+### v1.5 - 10/18/21
+
+- favicon now changes to a icon with red background if there is currently an 'urgent' todo in a user's stack
 
 ### v1.4.3 - 8/27/21
 

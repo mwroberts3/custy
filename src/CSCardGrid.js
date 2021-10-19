@@ -1,6 +1,20 @@
 import CSCard from './CSCard'
+import { useEffect } from 'react'
 
-const CSCardGrid = ({initiateEdit, setTodos, todos, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted}) => {
+const CSCardGrid = ({initiateEdit, todos, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted}) => {
+  
+    const urgentFaviconCheck = () => {
+        let tempUrgentCheck = todos.filter((todo) => !todo.urgent)
+
+        if (todos.length !== tempUrgentCheck.length) {
+            document.querySelector('link').href = "https://raw.githubusercontent.com/mwroberts3/custy/master/src/live-urgents.png"
+        } else {
+            document.querySelector('link').href = "https://raw.githubusercontent.com/mwroberts3/custy/master/public/favicon.ico"
+        }
+    }
+
+    useEffect(urgentFaviconCheck)
+
     return (
         <div id='customer-service-todo'>
             {todos && todos.map((todo) => (

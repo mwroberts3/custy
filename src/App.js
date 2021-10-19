@@ -19,7 +19,7 @@ function App() {
     localStorage.setItem('bulletinBoard', JSON.stringify([]))
   }
 
-  const [lightTheme, setLightTheme] = useState(true)
+  const [lightTheme, setLightTheme] = useState(localStorage.getItem('light-theme'))
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   const [addTodo, setAddTodo] = useState(false)
@@ -39,11 +39,6 @@ function App() {
 
     setBboardItemArray(JSON.parse(localStorage.getItem('bulletinBoard')))
   }
-
-  // dynamic favicon test
-  console.log(document.querySelector('link'))
-
-  // document.querySelector('link').href = "%PUBLIC_URL%/live-urgents.png"
 
   const addNewTodo = (orderNumber, todo) => {
     let currentTodos = []
@@ -242,7 +237,7 @@ const deleteBBoardItemFromArray = (itemToBeDeleted) => {
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
         setSelectedBBoardItemContents={setSelectedBBoardItemContents} setAddNewBBoardItem={setAddNewBBoardItem}/>
-        <CSCardGrid initiateEdit={initiateEdit} setTodos={setTodos} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
+        <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
         {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem} deleteBBoardItemFromArray={deleteBBoardItemFromArray} bbItemToBeDeleted={bbItemToBeDeleted}/>}
