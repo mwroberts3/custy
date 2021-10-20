@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.5.2
-**Release:** 10/19/21
+**Version:** 1.5.4
+**Release:** 10/20/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -21,6 +21,11 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.5.4 - 10/20/21
+
+- editing bulletin board item now pulls up HTML to edit, not just text content.
+- edited bulletin board item names doesn't created a new bulletin board item
 
 ### v1.5.2 - 10/19/21
 

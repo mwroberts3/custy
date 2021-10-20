@@ -26,8 +26,8 @@ function App() {
   const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
-  const [bbItemToBeDeleted, setBBItemToBeDeleted] = useState()
   const bbEditCheck = useRef(false)
+  const prevBbName = useRef(null)
 
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
@@ -238,10 +238,15 @@ const deleteBBoardItemFromArray = (itemToBeDeleted) => {
         {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem}
         setBboardItemArray={setBboardItemArray} 
         bbEditCheck={bbEditCheck}
+        prevBbName={prevBbName}
         />}
-        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem} 
-        bbEditCheck={bbEditCheck}
-        deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
+        <BBoardItemContents 
+          contents={selectedBBoardItemContents} 
+          setAddNewBBoardItem={setAddNewBBoardItem}
+          deleteBBoardItemFromArray={deleteBBoardItemFromArray}
+          bbEditCheck={bbEditCheck}
+          prevBbName={prevBbName}
+        />
       </div>
   );
 }

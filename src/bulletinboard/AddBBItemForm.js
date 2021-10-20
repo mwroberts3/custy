@@ -1,9 +1,7 @@
-const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArray, bbEditCheck}) => {
+const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArray, bbEditCheck, prevBbName}) => {
     const submitBBoardItem = (e) => {
         e.preventDefault()
         let tempBBoardItemArray = bboardItemArray
-
-        console.log(bbEditCheck)
 
         let tempBBoardItem = {name: document.querySelector('#bbItemHeader').value, desc: document.querySelector('#newBBItemContent').value}
 
@@ -16,15 +14,11 @@ const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArra
             alert('bulletin board item with that name already exists, please choose a different name')
         } else {
             // don't allow dupiclate if it's a bulletin board item edit
-            tempBBoardItemArray = tempBBoardItemArray.filter((item) => item.name !== tempBBoardItem.name)
-
-            console.log(tempBBoardItemArray)
+            tempBBoardItemArray = tempBBoardItemArray.filter((item) => item.name !== tempBBoardItem.name && item.name !== prevBbName.current)
 
             if (tempBBoardItem.name !== '' && tempBBoardItem.desc !== '') {
 
                 tempBBoardItemArray.push(tempBBoardItem)
-
-                console.log(tempBBoardItemArray)
 
                 localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
             }
@@ -32,6 +26,8 @@ const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArra
         setBboardItemArray(tempBBoardItemArray)
         setAddNewBBoardItem(false)
         }
+
+        prevBbName.current = null
     }
 
     return (
