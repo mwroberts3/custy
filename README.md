@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.5.1
-**Release:** 10/18/21
+**Version:** 1.5.2
+**Release:** 10/19/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -21,6 +21,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.5.2 - 10/19/21
+
+- fixed bulletin board bug so editing and adding new should work fine now
 
 ### v1.5.1 - 10/18/21
 

@@ -1,22 +1,37 @@
-const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, deleteBBoardItemFromArray, bbItemToBeDeleted }) => {
+const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArray, bbEditCheck}) => {
     const submitBBoardItem = (e) => {
         e.preventDefault()
         let tempBBoardItemArray = bboardItemArray
 
+        console.log(bbEditCheck)
+
         let tempBBoardItem = {name: document.querySelector('#bbItemHeader').value, desc: document.querySelector('#newBBItemContent').value}
 
-        if (tempBBoardItem.name !== '' && tempBBoardItem.desc !== '') {
-            tempBBoardItemArray.push(tempBBoardItem)
+        let dupeCheck = []
 
-            localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
-        }
+        // make sure new bulletin board item isn't a duplicate
+        dupeCheck = tempBBoardItemArray.filter((item) => item.name === tempBBoardItem.name)
 
-        console.log(bbItemToBeDeleted)
-        deleteBBoardItemFromArray(bbItemToBeDeleted)
+        if (dupeCheck.length >= 1 && !bbEditCheck.current) {
+            alert('bulletin board item with that name already exists, please choose a different name')
+        } else {
+            // don't allow dupiclate if it's a bulletin board item edit
+            tempBBoardItemArray = tempBBoardItemArray.filter((item) => item.name !== tempBBoardItem.name)
 
+            console.log(tempBBoardItemArray)
+
+            if (tempBBoardItem.name !== '' && tempBBoardItem.desc !== '') {
+
+                tempBBoardItemArray.push(tempBBoardItem)
+
+                console.log(tempBBoardItemArray)
+
+                localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
+            }
+
+        setBboardItemArray(tempBBoardItemArray)
         setAddNewBBoardItem(false)
-
-        document.querySelector('#add-bbitem-form').classList.add('hidden')
+        }
     }
 
     return (

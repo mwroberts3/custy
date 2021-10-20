@@ -1,21 +1,19 @@
 import DeleteBBItem from './DeleteBBItem'
 import EditBBItem from './EditBBItem'
 
-const BBoardItemContents = ({contents, setAddNewBBoardItem, deleteBBoardItemFromArray, setBBItemToBeDeleted, bbItemToBeDeleted}) => {
+const BBoardItemContents = ({contents, setAddNewBBoardItem, deleteBBoardItemFromArray, bbEditCheck, setBBItemToBeDeleted, bbItemToBeDeleted}) => {
     const editBBItemFunc = (e) => {
-        // console.log(e.target.parentNode.parentNode.children[0].textContent)
-        // console.log(e.target.parentNode.parentNode.children[1].textContent)
-
         setAddNewBBoardItem(true)
+        bbEditCheck.current = true
         
-        setBBItemToBeDeleted(e.target.parentNode.parentNode.children[0].textContent)
+        // setBBItemToBeDeleted(e.target.parentNode.parentNode.children[0].textContent)
 
         setTimeout(() => {
             document.getElementById('bbItemHeader').value = e.target.parentNode.parentNode.children[0].textContent
 
-            bbItemToBeDeleted = e.target.parentNode.parentNode.children[0].textContent
+            // bbItemToBeDeleted = e.target.parentNode.parentNode.children[0].textContent
 
-            console.log(bbItemToBeDeleted)
+            // console.log(bbItemToBeDeleted)
 
             document.getElementById('newBBItemContent').value = e.target.parentNode.parentNode.children[1].textContent
         },50)

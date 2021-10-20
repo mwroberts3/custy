@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import logo from './custy-logo.png'
 import CSCardGrid from './CSCardGrid'
 import AddTodo from './AddTodo'
@@ -27,6 +27,8 @@ function App() {
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing')
   const [bbItemToBeDeleted, setBBItemToBeDeleted] = useState()
+  const bbEditCheck = useRef(false)
+
   const [editCheck, setEditCheck] = useState(false)
   const [preEditInfo, setPreEditInfo] = useState({})
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')))
@@ -54,8 +56,6 @@ function App() {
 
     if(possibleDuplicate) {
       for (let i=0; i<currentTodos.length; i++) {
-        console.log(currentTodos[i].orderNumber.substring(0, orderNumber.length))
-
         if (currentTodos[i].orderNumber.substring(0, orderNumber.length + 2) === `${orderNumber} -`) {
           duplicateCount++
         }
@@ -144,9 +144,7 @@ const closeTodo = (e, todo) => {
     }
 
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
-    
-    console.log(document.querySelectorAll('.todoToBeClosed').length)
-    
+       
     clearInterval(undoTimerInt)
     setTodos(tempTodos)
   }, 2000) 
@@ -160,8 +158,6 @@ const closeTodo = (e, todo) => {
   `
 
   document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
-    console.log('urgent undo test')
-
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('urgent-undo')
 
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
@@ -169,7 +165,6 @@ const closeTodo = (e, todo) => {
     document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo
     clearInterval(undoTimerInt)
 
-    console.log(document.querySelectorAll('.todoToBeClosed').length)
     if (document.querySelectorAll('.todoToBeClosed').length < 1) {
       setTodos([]) 
       setTodos(tempTodos)
@@ -211,8 +206,6 @@ const restoreTodo = () => {
 }
 
 const deleteBBoardItemFromArray = (itemToBeDeleted) => {
-  console.log(itemToBeDeleted)
-
   let tempBBoardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
 
   localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
@@ -233,15 +226,22 @@ const deleteBBoardItemFromArray = (itemToBeDeleted) => {
           width:'100%', display: 'flex', justifyContent: 'center'
           }}>
           <AddTodo addTodo={addTodo} editCheck={editCheck} addNewBBoardItem={addNewBBoardItem} setAddTodo={setAddTodo} setEditCheck={setEditCheck} />
-          <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem} addTodo={addTodo} editCheck={editCheck}/>
+          <AddBBoardItem setAddNewBBoardItem={setAddNewBBoardItem} addNewBBoardItem={addNewBBoardItem} addTodo={addTodo} editCheck={editCheck}
+          bbEditCheck={bbEditCheck}
+          />
         </div>
         <BulletinBoard bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray}
         setSelectedBBoardItemContents={setSelectedBBoardItemContents} setAddNewBBoardItem={setAddNewBBoardItem}/>
         <CSCardGrid initiateEdit={initiateEdit} todos={todos} setTodoUrgent={setTodoUrgent} setTodoWaiting={setTodoWaiting} closeTodo={closeTodo} freshDeleted={freshDeleted} setFreshDeleted={setFreshDeleted}/>
         {addTodo && <AddTodoForm addNewTodo={ addNewTodo }/>}
         {editCheck && <EditTodoForm submitEdit={ submitEdit } orderNumber={preEditInfo.orderNumber} todo={preEditInfo.todo}/>}
-        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem} deleteBBoardItemFromArray={deleteBBoardItemFromArray} bbItemToBeDeleted={bbItemToBeDeleted}/>}
-        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem} setBBItemToBeDeleted={setBBItemToBeDeleted} bbItemToBeDeleted={bbItemToBeDeleted} deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
+        {addNewBBoardItem && <AddBBItemForm bboardItemArray={bboardItemArray}setAddNewBBoardItem={setAddNewBBoardItem}
+        setBboardItemArray={setBboardItemArray} 
+        bbEditCheck={bbEditCheck}
+        />}
+        <BBoardItemContents contents={selectedBBoardItemContents} bboardItemArray={bboardItemArray} setBboardItemArray={setBboardItemArray} setAddNewBBoardItem={setAddNewBBoardItem} 
+        bbEditCheck={bbEditCheck}
+        deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
       </div>
   );
 }
