@@ -22,6 +22,10 @@ function App() {
   const [lightTheme, setLightTheme] = useState(JSON.parse(localStorage.getItem('light-theme')))
 
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
+  if (todos === null) {
+      let nullTodos = []
+      localStorage.setItem('todos', JSON.stringify(nullTodos))
+  }
   const [addTodo, setAddTodo] = useState(false)
   const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)

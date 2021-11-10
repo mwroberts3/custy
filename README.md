@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.5.4
-**Release:** 10/20/21
+**Version:** 1.5.7
+**Release:** 11/10/21
 **License:** MIT
 
 https://custy.netlify.app/
@@ -21,6 +21,12 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.5.7 - 11/10/21
+
+- fixed pretty huge bug of app not loading if there is no 'todos' object in localstorage
+- fixed distorted font display in Firefox
+- fixed bulletin board title display, removed word wrap if total text lengths of items exceeded the banner width
 
 ### v1.5.4 - 10/20/21
 

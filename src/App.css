@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
 * {
   padding: 0;
@@ -18,6 +18,28 @@ body {
 
 h1 {
   text-align: center;
+}
+
+/* Scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* background: #ffe570; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #fcde5a;
+}
+
+/* firefox scroll */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #fcde5a #f7ecbd;
 }
 
 /* Utils */
@@ -256,7 +278,7 @@ button {
   font-weight: bold;
   margin: 0 5px;
   height: 40px;
-  background-color: rgb(247, 236, 189);
+  background-color: #f7ecbd;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -273,6 +295,7 @@ button {
 .bulletin-board-item {
   margin: 0 5px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .bulletin-board-spacer {
