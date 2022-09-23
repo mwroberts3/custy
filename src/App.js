@@ -12,8 +12,12 @@ import NightMode from './navbar/NightMode'
 import BulletinBoard from './bulletinboard/BulletinBoard';
 import BBoardItemContents from './bulletinboard/BBoardItemContents';
 import AddBBItemForm from './bulletinboard/AddBBItemForm';
+import { useGlobalContext } from './context';
 
 function App() {
+  console.log('test');
+  const { todos, setTodos} = useGlobalContext();
+
   // bulletin board check
   if (!localStorage.getItem('bulletinBoard')) {
     localStorage.setItem('bulletinBoard', JSON.stringify([]))
@@ -21,11 +25,6 @@ function App() {
 
   const [lightTheme, setLightTheme] = useState(JSON.parse(localStorage.getItem('light-theme')))
 
-  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
-  if (todos === null) {
-      let nullTodos = []
-      localStorage.setItem('todos', JSON.stringify(nullTodos))
-  }
   const [addTodo, setAddTodo] = useState(false)
   const [freshDeleted, setFreshDeleted] = useState(false)
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false)
