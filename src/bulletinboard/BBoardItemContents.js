@@ -1,7 +1,10 @@
 import DeleteBBItem from './DeleteBBItem'
 import EditBBItem from './EditBBItem'
+import { useGlobalContext } from '../context'
 
-const BBoardItemContents = ({contents, setAddNewBBoardItem, deleteBBoardItemFromArray, bbEditCheck, prevBbName}) => {
+const BBoardItemContents = () => {
+    const { selectedBBoardItemContents, setAddNewBBoardItem, deleteBBoardItemFromArray, bbEditCheck, prevBbName } = useGlobalContext();
+
     const editBBItemFunc = (e) => {
         setAddNewBBoardItem(true)
         bbEditCheck.current = true
@@ -15,10 +18,11 @@ const BBoardItemContents = ({contents, setAddNewBBoardItem, deleteBBoardItemFrom
         },50)
     }
 
+    const {name, desc} = selectedBBoardItemContents;
     return (
         <div className="bboard-item-contents-container hidden">
-            <h2>{contents.name}</h2>
-            <div className="bboard-item-contents" dangerouslySetInnerHTML={{__html: contents.desc}}>
+            <h2>{name}</h2>
+            <div className="bboard-item-contents" dangerouslySetInnerHTML={{__html: desc}}>
             </div>
 
             <div style={{marginTop: '20px'}}>

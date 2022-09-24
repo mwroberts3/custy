@@ -1,7 +1,10 @@
 import BBoardItem from './BBoardItem'
 import BBoardSpacer from './BulletinBoardSpacer'
+import { useGlobalContext } from '../context'
 
-const BulletinBoard = ({bboardItemArray, setSelectedBBoardItemContents}) => {
+const BulletinBoard = () => {
+    const { bboardItemArray, setSelectedBBoardItemContents } = useGlobalContext();
+
     // sort bulletin board in alphabetical order
     bboardItemArray.sort(function(a, b){ 
         if (a.name.toUpperCase() < b.name.toUpperCase()) {

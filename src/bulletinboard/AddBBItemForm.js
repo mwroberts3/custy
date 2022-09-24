@@ -1,4 +1,8 @@
-const AddBBItemForm = ({ bboardItemArray, setAddNewBBoardItem, setBboardItemArray, bbEditCheck, prevBbName}) => {
+import { useGlobalContext } from "../context"
+
+const AddBBItemForm = () => {
+    const { bboardItemArray, setAddNewBBoardItem, setBboardItemArray, bbEditCheck, prevBbName } = useGlobalContext();
+
     const submitBBoardItem = (e) => {
         e.preventDefault()
         let tempBBoardItemArray = bboardItemArray

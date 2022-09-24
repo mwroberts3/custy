@@ -1,4 +1,8 @@
-const AddTodo = ({addTodo, editCheck, addNewBBoardItem, setAddTodo, setEditCheck}) => {
+import { useGlobalContext } from "./context";
+
+const AddTodo = () => {
+    const {addTodo, setAddTodo, editCheck, setEditCheck, addNewBBoardItem} = useGlobalContext();
+
     if (addTodo || editCheck) {
         if (addTodo && !editCheck) {
             return (<button id="addTodoBtn" onClick={() => setAddTodo(!addTodo)}>Close</button>)

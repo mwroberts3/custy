@@ -1,4 +1,8 @@
-const AddTodoForm = ({ addNewTodo }) => {
+import { useGlobalContext } from "./context"
+
+const AddTodoForm = () => {
+    const { addNewTodo } = useGlobalContext();
+
     return (
         <form id="add-todo-form">
            <label>Reference Number:</label>

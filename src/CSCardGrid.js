@@ -1,7 +1,9 @@
 import CSCard from './CSCard'
 import { useEffect } from 'react'
+import { useGlobalContext } from './context'
 
-const CSCardGrid = ({initiateEdit, todos, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted}) => {
+const CSCardGrid = ({}) => {
+    const { todos, initiateEdit, setTodoUrgent, setTodoWaiting, closeTodo, freshDeleted, setFreshDeleted } = useGlobalContext();
   
     const urgentFaviconCheck = () => {
         let tempUrgentCheck = todos.filter((todo) => !todo.urgent)
