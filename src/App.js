@@ -22,7 +22,15 @@ function App() {
     localStorage.setItem('bulletinBoard', JSON.stringify([]))
   }
 
-  const [lightTheme, setLightTheme] = useState(JSON.parse(localStorage.getItem('light-theme')))
+  const [lightTheme, setLightTheme] = useState(() => {
+    if (localStorage.getItem('light-theme')) {
+      return JSON.parse(localStorage.getItem('light-theme'))
+    } else {
+      localStorage.setItem('light-theme', true);
+      
+      return JSON.parse(localStorage.getItem('light-theme'))
+    }
+  })
 
   // apply light/dark theme upon focus
   window.onfocus = () => {

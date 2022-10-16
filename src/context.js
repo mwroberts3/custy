@@ -48,8 +48,15 @@ export const AppProvider = ({children}) => {
 
   const closeTodo = (e, todo) => {
     let tempTodos = todos
-  const undoTimerInt = setInterval(() => {
-    tempTodos = tempTodos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)
+
+    // need to delete all todos if multiple ones are clicked on
+    let prevClosed = Array.from(document.querySelectorAll('.todoToBeClosed'));
+    if (prevClosed.length >= 1) {
+      console.log(prevClosed[0].textContent);
+    }
+    
+    const undoTimerInt = setTimeout(() => {
+      tempTodos = tempTodos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)
     
     localStorage.setItem('todos', JSON.stringify(tempTodos))
     
@@ -70,17 +77,14 @@ export const AppProvider = ({children}) => {
 
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
        
-    clearInterval(undoTimerInt)
     setTodos(tempTodos)
   }, 2000) 
 
-  let selectedTodo = e.target.parentNode.parentNode.parentNode.innerHTML
-  
-  e.target.parentNode.parentNode.parentNode.innerHTML = `
-  <div id="testDelete-${todo.orderNumber}" class="urgent-undo todoToBeClosed">
-  <button class="undo-btn">Undo</button>
-  </div>
-  `
+  let selectedTodo = e.target.parentNode.parentNode.innerHTML
+
+  e.target.parentNode.parentNode.classList = 'urgent-undo todoToBeClosed';
+  e.target.parentNode.parentNode.id = `testDelete-${todo.orderNumber}`;
+  e.target.parentNode.parentNode.innerHTML = '<button class="undo-btn">Undo</button>';
 
   document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('urgent-undo')
@@ -88,9 +92,10 @@ export const AppProvider = ({children}) => {
     document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
 
     document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo
-    clearInterval(undoTimerInt)
+    clearTimeout(undoTimerInt)
 
     if (document.querySelectorAll('.todoToBeClosed').length < 1) {
+      // what's going on here?
       setTodos([]) 
       setTodos(tempTodos)
     }

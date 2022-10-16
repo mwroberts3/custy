@@ -12,7 +12,9 @@ const NightMode = ({lightTheme, setLightTheme}) => {
                 document.getElementById('custy-logo').style.filter = 'invert(0%)'
             }
         } else {
-            localStorage.setItem('light-theme', false)
+            if (localStorage.getItem('light-theme')) {
+                localStorage.setItem('light-theme', false)
+            }
     
             document.getElementsByTagName('BODY')[0].style.background = 'black'
     
