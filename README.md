@@ -1,7 +1,7 @@
 # Custy
 
-**Version:** 1.5.7
-**Release:** 11/10/21
+**Version:** 1.5.10
+**Release:** 10/22/22
 **License:** MIT
 
 https://custy.netlify.app/
@@ -21,6 +21,11 @@ Added todos can be marked as "urgent" or "waiting for response".
 - dark mode
 
 ## Version History
+
+### v1.5.10 - 10/22/22
+
+- fixed that huge bug of not being able to delete multiple todos. Now users can delete 2+ todos without issue
+- also made a UI tweak of making each individual todo control header a sticky
 
 ### v1.5.7 - 11/10/21
 

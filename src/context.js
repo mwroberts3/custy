@@ -46,8 +46,13 @@ export const AppProvider = ({children}) => {
     setEditCheck(!editCheck)
   }
 
+  const toCloseArr = [];
+  const closeTimeouts = [];
   const closeTodo = (e, todo) => {
     const todosToBeClosed = Array.from(document.querySelectorAll('.todoToBeClosed'));
+
+
+    toCloseArr.push(todo.orderNumber);
     
     const undoTimerInt = setTimeout(() => {    
       // Add to deleted Todo list
@@ -61,34 +66,34 @@ export const AppProvider = ({children}) => {
       localStorage.setItem('deleted-todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)))
     }
 
-    // document.getElementById(`testDelete-${todo.orderNumber}`).classList.remove('todoToBeClosed')
-
-    if (todosToBeClosed.length >= 1) {
-      console.log(todosToBeClosed[0]);
-      console.log('Multiple Closes')
-      localStorage.setItem('todos', JSON.stringify(todos.filter((tempTodo) => {
-        console.log(tempTodo.orderNumber, todosToBeClosed[0].id.substring(11))
-        return tempTodo.orderNumber !== todosToBeClosed[0].id.substring(11)
-      })))
-
-      setTodos(JSON.parse(localStorage.getItem('todos')));    
+    if (toCloseArr.length > 1) {
+      localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo =>  !toCloseArr.includes(tempTodo.orderNumber))))
     } else {
-    }  
-
-    localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)));
+      localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)));
+    }
 
     setTodos(JSON.parse(localStorage.getItem('todos')));    
-  }, 2000) 
-  
+  }, 2000);
+
+  closeTimeouts.push(undoTimerInt);
+
   const selectedTodo = e.target.parentNode.parentNode;
-  
   selectedTodo.classList = 'urgent-undo todoToBeClosed';
   selectedTodo.id = `testDelete-${todo.orderNumber}`;
   selectedTodo.innerHTML = '<button class="undo-btn">Undo</button>';
+  
+  if (todosToBeClosed.length >= 1) {
+    todosToBeClosed[0].innerHTML = ``;
+  }
 
   document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
     document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo.innerHTML;
-    clearTimeout(undoTimerInt);
+  
+    closeTimeouts.forEach((timeout) => clearTimeout(timeout))
+
+    if (toCloseArr.length > 1) {
+      localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.orderNumber !== toCloseArr[0])))
+    }
 
     setTodos([]);
     setTodos(JSON.parse(localStorage.getItem('todos')));
