@@ -1,11 +1,10 @@
-const BBoardItem = ({name, desc, setSelectedBBoardItemContents, setAddNewBBoardItem}) => {
+import { useGlobalContext } from "../context"
+
+const BBoardItem = ({name, desc}) => {
+    const { setSelectedBBoardItemContents, setAddNewBBoardItem } = useGlobalContext();
+
     const applyBBItemContent = (desc, name) => {
-        document.querySelector('.bboard-item-contents-container').classList.remove('hidden')
-
-        document.querySelector('.bboard-item-contents-container').addEventListener('click', () => {
-            document.querySelector('.bboard-item-contents-container').classList.add('hidden')
-        })
-
+        document.querySelector('.bboard-item-contents-container').classList.remove('hidden');
 
         setAddNewBBoardItem(true);
         setSelectedBBoardItemContents({name, desc})

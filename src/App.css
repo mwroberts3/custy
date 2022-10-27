@@ -310,7 +310,7 @@ button {
 .bboard-item-contents-container {
   position: absolute;
   width: 400px;
-  top: -120px;
+  top: -150px;
   right: 50%;
   height: 500px;
   transform: translate(50%, 50%);

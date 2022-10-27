@@ -1,11 +1,12 @@
 import { useGlobalContext } from "../context"
 
 const AddBBoardItem = () => {
-    const { addTodo, setAddNewBBoardItem, addNewBBoardItem, editCheck, bbEditCheck } = useGlobalContext();
+    const { addTodo, setAddNewBBoardItem, addNewBBoardItem, editCheck, bbEditCheck, closeCurrentBBItem } = useGlobalContext();
 
     if (!addNewBBoardItem) {
         return (
-            <button id="addBBoardItemBtn" onClick={() => {if (!addTodo && !editCheck) {
+            <button id="addBBoardItemBtn" onClick={() => {
+            if (!addTodo && !editCheck) {
                 bbEditCheck.current = false
                 setAddNewBBoardItem(true)
                 }}}>
@@ -14,8 +15,11 @@ const AddBBoardItem = () => {
         )
     } else {
         return (
-            <button id="addBBoardItemBtn" onClick={() => setAddNewBBoardItem(false)}>
-                Close
+            <button id="addBBoardItemBtn" onClick={() => {
+                closeCurrentBBItem();
+                setAddNewBBoardItem(false);
+            }}>
+                <strong>Close</strong>
             </button>
         )
     }

@@ -29,9 +29,9 @@ const BBoardItemContents = () => {
                 <DeleteBBItem deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
                 <EditBBItem editBBItemFunc={editBBItemFunc} />
             </div>
-            <div>
+            {/* <div>
                 <small><em>(click inside this popup to close)</em></small>
-            </div>
+            </div> */}
         </div>
     )
 }

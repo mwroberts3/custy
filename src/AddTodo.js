@@ -5,9 +5,9 @@ const AddTodo = () => {
 
     if (addTodo || editCheck) {
         if (addTodo && !editCheck) {
-            return (<button id="addTodoBtn" onClick={() => setAddTodo(!addTodo)}>Close</button>)
+            return (<button id="addTodoBtn" onClick={() => setAddTodo(!addTodo)}><strong>Close</strong></button>)
         } else {
-            return (<button id="addTodoBtn" onClick={() => setEditCheck(!editCheck)}>Close</button>)
+            return (<button id="addTodoBtn" onClick={() => setEditCheck(!editCheck)}><strong>Close</strong></button>)
         }
     } else {
         return (<button id="addTodoBtn" onClick={() => {

@@ -20,10 +20,7 @@ const BulletinBoard = () => {
         <div id="bulletin-board">
             {bboardItemArray.map((bboard, index) => (
                 <div className="bboard-item-container" key={index}>
-                <BBoardItem name={bboard.name} desc={bboard.desc}
-                setSelectedBBoardItemContents={setSelectedBBoardItemContents}
-                setAddNewBBoardItem={setAddNewBBoardItem}
-                /> 
+                <BBoardItem name={bboard.name} desc={bboard.desc} /> 
                 {index < bboardItemArray.length -1 && <BBoardSpacer />}
                 </div>
             ))}

@@ -192,6 +192,10 @@ const restoreTodo = () => {
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')));
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing');
 
+  const closeCurrentBBItem = () => {
+    document.querySelector('.bboard-item-contents-container').classList.add('hidden');
+  }
+
   const deleteBBoardItemFromArray = (itemToBeDeleted) => {
     let tempBBoardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
 
@@ -216,6 +220,7 @@ const restoreTodo = () => {
     setBboardItemArray,
     selectedBBoardItemContents,
     setSelectedBBoardItemContents,
+    closeCurrentBBItem,
     preEditInfo,
     setPreEditInfo,
     initiateEdit,
