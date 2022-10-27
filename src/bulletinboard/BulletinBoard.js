@@ -3,7 +3,7 @@ import BBoardSpacer from './BulletinBoardSpacer'
 import { useGlobalContext } from '../context'
 
 const BulletinBoard = () => {
-    const { bboardItemArray, setSelectedBBoardItemContents } = useGlobalContext();
+    const { bboardItemArray, setSelectedBBoardItemContents, setAddNewBBoardItem } = useGlobalContext();
 
     // sort bulletin board in alphabetical order
     bboardItemArray.sort(function(a, b){ 
@@ -22,6 +22,7 @@ const BulletinBoard = () => {
                 <div className="bboard-item-container" key={index}>
                 <BBoardItem name={bboard.name} desc={bboard.desc}
                 setSelectedBBoardItemContents={setSelectedBBoardItemContents}
+                setAddNewBBoardItem={setAddNewBBoardItem}
                 /> 
                 {index < bboardItemArray.length -1 && <BBoardSpacer />}
                 </div>

@@ -1,4 +1,4 @@
-const BBoardItem = ({name, desc, setSelectedBBoardItemContents}) => {
+const BBoardItem = ({name, desc, setSelectedBBoardItemContents, setAddNewBBoardItem}) => {
     const applyBBItemContent = (desc, name) => {
         document.querySelector('.bboard-item-contents-container').classList.remove('hidden')
 
@@ -7,7 +7,7 @@ const BBoardItem = ({name, desc, setSelectedBBoardItemContents}) => {
         })
 
 
-
+        setAddNewBBoardItem(true);
         setSelectedBBoardItemContents({name, desc})
     }
 
