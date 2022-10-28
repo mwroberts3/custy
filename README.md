@@ -22,6 +22,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 
 ## Version History
 
+### v1.5.12 - 10/28/22
+
+- changed the way bulletin board items are closed, it's now closed by the 'Add Board Item' button, which transforms to 'Close'
+
 ### v1.5.10 - 10/22/22
 
 - fixed that huge bug of not being able to delete multiple todos. Now users can delete 2+ todos without issue
