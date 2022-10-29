@@ -80,7 +80,15 @@ export const AppProvider = ({children}) => {
   const selectedTodo = e.target.parentNode.parentNode;
   selectedTodo.classList = 'urgent-undo todoToBeClosed';
   selectedTodo.id = `testDelete-${todo.orderNumber}`;
-  selectedTodo.innerHTML = '<button class="undo-btn">Undo</button>';
+  selectedTodo.style.cursor = 'pointer';
+  selectedTodo.innerHTML = `
+  <span style="background: #fff; 
+              color: #000;
+              font-weight: bold;
+              padding: 10px;
+              border-radius: 5px;
+              ">U N D O</span>
+  `;
   
   if (todosToBeClosed.length >= 1) {
     todosToBeClosed[0].innerHTML = ``;
