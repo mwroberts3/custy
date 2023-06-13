@@ -3,7 +3,7 @@ import EditBBItem from './EditBBItem'
 import { useGlobalContext } from '../context'
 
 const BBoardItemContents = () => {
-    const { selectedBBoardItemContents, setAddNewBBoardItem, deleteBBoardItemFromArray, bbEditCheck, prevBbName } = useGlobalContext();
+    const { selectedBBoardItemContents, setAddNewBBoardItem, deleteBBoardItemFromArray, bbEditCheck, prevBbName, currentBboardItem } = useGlobalContext();
 
     const editBBItemFunc = (e) => {
         setAddNewBBoardItem(true)
@@ -12,21 +12,21 @@ const BBoardItemContents = () => {
         setTimeout(() => {
             prevBbName.current = e.target.parentNode.parentNode.children[0].textContent
             document.getElementById('bbItemHeader').value = e.target.parentNode.parentNode.children[0].textContent
-            
+
             let bbContentHtml = e.target.parentNode.parentNode.children[1].innerHTML
             document.getElementById('newBBItemContent').value = bbContentHtml
-        },50)
+        }, 50)
     }
 
-    const {name, desc} = selectedBBoardItemContents;
+    const { name, desc } = selectedBBoardItemContents;
     return (
-        <div className="bboard-item-contents-container hidden">
+        <div className="bboard-item-contents-container hidden" ref={currentBboardItem}>
             <h2>{name}</h2>
-            <div className="bboard-item-contents" dangerouslySetInnerHTML={{__html: desc}}>
+            <div className="bboard-item-contents" dangerouslySetInnerHTML={{ __html: desc }}>
             </div>
 
-            <div style={{marginTop: '20px'}}>
-                <DeleteBBItem deleteBBoardItemFromArray={deleteBBoardItemFromArray}/>
+            <div style={{ marginTop: '20px' }}>
+                <DeleteBBItem deleteBBoardItemFromArray={deleteBBoardItemFromArray} />
                 <EditBBItem editBBItemFunc={editBBItemFunc} />
             </div>
             {/* <div>

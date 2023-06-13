@@ -22,6 +22,10 @@ Added todos can be marked as "urgent" or "waiting for response".
 
 ## Version History
 
+### v1.5.13 - 10/29/22
+
+- changed the look of instant undo to prevent it from resizing and shifting todo grid
+
 ### v1.5.12 - 10/28/22
 
 - changed the way bulletin board items are closed, it's now closed by the 'Add Board Item' button, which transforms to 'Close'

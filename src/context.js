@@ -2,7 +2,7 @@ import { useState, useRef, createContext, useContext } from 'react'
 
 const AppContext = createContext();
 
-export const AppProvider = ({children}) => {
+export const AppProvider = ({ children }) => {
   // TODOs
   const [todos, setTodos] = useState(() => {
     if (localStorage.getItem('todos')) {
@@ -53,35 +53,35 @@ export const AppProvider = ({children}) => {
 
 
     toCloseArr.push(todo.orderNumber);
-    
-    const undoTimerInt = setTimeout(() => {    
+
+    const undoTimerInt = setTimeout(() => {
       // Add to deleted Todo list
       let deletedTodosList = []
-    
+
       if (localStorage.getItem('deleted-todos')) {
-      deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
-           
-      localStorage.setItem('deleted-todos', JSON.stringify([...deletedTodosList, todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)[0]]))
-    } else {
-      localStorage.setItem('deleted-todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)))
-    }
+        deletedTodosList = JSON.parse(localStorage.getItem('deleted-todos'))
 
-    if (toCloseArr.length > 1) {
-      localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo =>  !toCloseArr.includes(tempTodo.orderNumber))))
-    } else {
-      localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)));
-    }
+        localStorage.setItem('deleted-todos', JSON.stringify([...deletedTodosList, todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)[0]]))
+      } else {
+        localStorage.setItem('deleted-todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber === todo.orderNumber)))
+      }
 
-    setTodos(JSON.parse(localStorage.getItem('todos')));    
-  }, 2000);
+      if (toCloseArr.length > 1) {
+        localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo => !toCloseArr.includes(tempTodo.orderNumber))))
+      } else {
+        localStorage.setItem('todos', JSON.stringify(todos.filter(tempTodo => tempTodo.orderNumber !== todo.orderNumber)));
+      }
 
-  closeTimeouts.push(undoTimerInt);
+      setTodos(JSON.parse(localStorage.getItem('todos')));
+    }, 2000);
 
-  const selectedTodo = e.target.parentNode.parentNode;
-  selectedTodo.classList = 'urgent-undo todoToBeClosed';
-  selectedTodo.id = `testDelete-${todo.orderNumber}`;
-  selectedTodo.style.cursor = 'pointer';
-  selectedTodo.innerHTML = `
+    closeTimeouts.push(undoTimerInt);
+
+    const selectedTodo = e.target.parentNode.parentNode;
+    selectedTodo.classList = 'urgent-undo todoToBeClosed';
+    selectedTodo.id = `testDelete-${todo.orderNumber}`;
+    selectedTodo.style.cursor = 'pointer';
+    selectedTodo.innerHTML = `
   <span style="background: #fff; 
               color: #000;
               font-weight: bold;
@@ -89,30 +89,30 @@ export const AppProvider = ({children}) => {
               border-radius: 5px;
               ">U N D O</span>
   `;
-  
-  if (todosToBeClosed.length >= 1) {
-    todosToBeClosed[0].innerHTML = ``;
-  }
 
-  document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
-    document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo.innerHTML;
-  
-    closeTimeouts.forEach((timeout) => clearTimeout(timeout))
-
-    if (toCloseArr.length > 1) {
-      localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.orderNumber !== toCloseArr[0])))
+    if (todosToBeClosed.length >= 1) {
+      todosToBeClosed[0].innerHTML = ``;
     }
 
-    setTodos([]);
-    setTodos(JSON.parse(localStorage.getItem('todos')));
-  })
-}
+    document.getElementById(`testDelete-${todo.orderNumber}`).addEventListener('click', () => {
+      document.getElementById(`testDelete-${todo.orderNumber}`).innerHTML = selectedTodo.innerHTML;
+
+      closeTimeouts.forEach((timeout) => clearTimeout(timeout))
+
+      if (toCloseArr.length > 1) {
+        localStorage.setItem('todos', JSON.stringify(todos.filter((todo) => todo.orderNumber !== toCloseArr[0])))
+      }
+
+      setTodos([]);
+      setTodos(JSON.parse(localStorage.getItem('todos')));
+    })
+  }
 
   const setTodoUrgent = (orderNumber) => {
     todos.forEach(todo => {
-        if (todo.orderNumber === orderNumber) {
-            todo.urgent = !todo.urgent
-        }
+      if (todo.orderNumber === orderNumber) {
+        todo.urgent = !todo.urgent
+      }
     })
 
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -121,9 +121,9 @@ export const AppProvider = ({children}) => {
 
   const setTodoWaiting = (orderNumber) => {
     todos.forEach(todo => {
-        if (todo.orderNumber === orderNumber) {
-            todo.waitingForResponse = !todo.waitingForResponse
-        }
+      if (todo.orderNumber === orderNumber) {
+        todo.waitingForResponse = !todo.waitingForResponse
+      }
     })
 
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -135,15 +135,15 @@ export const AppProvider = ({children}) => {
 
     if (localStorage.getItem('todos')) {
       currentTodos = JSON.parse(localStorage.getItem('todos'))
-    } 
+    }
 
     // check for/edit duplicate orderNumbers
     let duplicateCount = 1
 
     let possibleDuplicate = currentTodos.find(todo => todo.orderNumber === orderNumber)
 
-    if(possibleDuplicate) {
-      for (let i=0; i<currentTodos.length; i++) {
+    if (possibleDuplicate) {
+      for (let i = 0; i < currentTodos.length; i++) {
         if (currentTodos[i].orderNumber.substring(0, orderNumber.length + 2) === `${orderNumber} -`) {
           duplicateCount++
         }
@@ -152,75 +152,80 @@ export const AppProvider = ({children}) => {
       orderNumber = `${orderNumber} - ${duplicateCount}`
     }
 
-    currentTodos.push({orderNumber, todo, date: new Date().toString().substring(0,15), urgent: false, waitingForResponse: false})
+    currentTodos.push({ orderNumber, todo, date: new Date().toString().substring(0, 15), urgent: false, waitingForResponse: false })
 
     localStorage.setItem('todos', JSON.stringify(currentTodos))
 
     setTodos(currentTodos)
     setAddTodo(!addTodo)
-}
+  }
 
-const restoreTodo = () => {
-  let currentTodos = []
-  
-  if (localStorage.getItem('todos')) {
-    currentTodos = JSON.parse(localStorage.getItem('todos'))
+  const restoreTodo = () => {
+    let currentTodos = []
 
-    document.querySelector('#restore-last-todo').classList.add('restore-enabled')
-  } 
+    if (localStorage.getItem('todos')) {
+      currentTodos = JSON.parse(localStorage.getItem('todos'))
 
-  if (localStorage.getItem('deleted-todos')) {
-    if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
-      let restoredTodoList
-  
-      restoredTodoList = JSON.parse(localStorage.getItem('deleted-todos'))
-  
-      restoredTodoList = restoredTodoList.reverse()
-  
-      let restoredTodo = restoredTodoList[0]
-  
-      restoredTodoList = restoredTodoList.filter(todo => todo !== restoredTodo)
-      localStorage.setItem('deleted-todos', JSON.stringify(restoredTodoList))
-  
-      currentTodos.push(restoredTodo)
-  
-      localStorage.setItem('todos', JSON.stringify(currentTodos))
-  
-      setTodos(currentTodos)
-    } else {
-      alert('all todos restored')
+      document.querySelector('#restore-last-todo').classList.add('restore-enabled')
+    }
+
+    if (localStorage.getItem('deleted-todos')) {
+      if (JSON.parse(localStorage.getItem('deleted-todos')).length > 0) {
+        let restoredTodoList
+
+        restoredTodoList = JSON.parse(localStorage.getItem('deleted-todos'))
+
+        restoredTodoList = restoredTodoList.reverse()
+
+        let restoredTodo = restoredTodoList[0]
+
+        restoredTodoList = restoredTodoList.filter(todo => todo !== restoredTodo)
+        localStorage.setItem('deleted-todos', JSON.stringify(restoredTodoList))
+
+        currentTodos.push(restoredTodo)
+
+        localStorage.setItem('todos', JSON.stringify(currentTodos))
+
+        setTodos(currentTodos)
+      } else {
+        alert('all todos restored')
+      }
     }
   }
-}
 
   // Bulletin Board
   const [addNewBBoardItem, setAddNewBBoardItem] = useState(false);
   const bbEditCheck = useRef(false);
   const prevBbName = useRef(null);
+  const currentBboardItem = useRef(null);
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')));
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing');
 
-  const closeCurrentBBItem = () => {
-    document.querySelector('.bboard-item-contents-container').classList.add('hidden');
+  const hideArray = () => {
+    currentBboardItem.current.classList = "bboard-item-contents-container hidden";
   }
 
   const deleteBBoardItemFromArray = (itemToBeDeleted) => {
     let tempBBoardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
 
+
     localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
 
     setBboardItemArray(tempBBoardItemArray)
+    hideArray();
+    setAddNewBBoardItem(false);
   }
 
-  return <AppContext.Provider value={{ 
+  return <AppContext.Provider value={{
     todos,
     setTodos,
     addTodo,
     setAddTodo,
     addNewTodo,
-    editCheck, 
+    editCheck,
     setEditCheck,
-    addNewBBoardItem, 
+    currentBboardItem,
+    addNewBBoardItem,
     setAddNewBBoardItem,
     bbEditCheck,
     prevBbName,
@@ -228,7 +233,6 @@ const restoreTodo = () => {
     setBboardItemArray,
     selectedBBoardItemContents,
     setSelectedBBoardItemContents,
-    closeCurrentBBItem,
     preEditInfo,
     setPreEditInfo,
     initiateEdit,
