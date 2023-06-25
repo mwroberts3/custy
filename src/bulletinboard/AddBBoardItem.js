@@ -3,8 +3,6 @@ import { useGlobalContext } from "../context"
 const AddBBoardItem = () => {
     const { addTodo, setAddNewBBoardItem, addNewBBoardItem, editCheck, bbEditCheck, currentBboardItem } = useGlobalContext();
 
-    console.log(currentBboardItem);
-
     if (!addNewBBoardItem) {
         return (
             <button id="addBBoardItemBtn" onClick={() => {
@@ -19,7 +17,6 @@ const AddBBoardItem = () => {
     } else {
         return (
             <button id="addBBoardItemBtn" onClick={() => {
-                console.log('this is a test');
                 currentBboardItem.current.classList = "bboard-item-contents-container hidden";
                 setAddNewBBoardItem(false);
             }}>
