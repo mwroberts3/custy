@@ -201,19 +201,20 @@ export const AppProvider = ({ children }) => {
   const [bboardItemArray, setBboardItemArray] = useState(JSON.parse(localStorage.getItem('bulletinBoard')));
   const [selectedBBoardItemContents, setSelectedBBoardItemContents] = useState('testing');
 
-  const hideArray = () => {
-    currentBboardItem.current.classList = "bboard-item-contents-container hidden";
-  }
-
   const deleteBBoardItemFromArray = (itemToBeDeleted) => {
     let tempBBoardItemArray = bboardItemArray.filter((item) => item.name !== itemToBeDeleted)
 
 
     localStorage.setItem('bulletinBoard', JSON.stringify(tempBBoardItemArray))
 
+    currentBboardItem.current.classList = "bboard-item-contents-container hidden";
+
     setBboardItemArray(tempBBoardItemArray)
-    hideArray();
     setAddNewBBoardItem(false);
+  }
+
+  const editBBoardItem = (name) => {
+    console.log(`${name} will be deleted`);
   }
 
   return <AppContext.Provider value={{
@@ -243,7 +244,8 @@ export const AppProvider = ({ children }) => {
     freshDeleted,
     setFreshDeleted,
     restoreTodo,
-    deleteBBoardItemFromArray
+    deleteBBoardItemFromArray,
+    editBBoardItem
   }}>
     {children}
   </AppContext.Provider>
